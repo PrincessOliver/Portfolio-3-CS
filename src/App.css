@@ -28,6 +28,39 @@
   color: #61dafb;
 }
 
+.navbar-nav > li {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.img1 {
+    padding-right: 90px;
+   
+}
+
+.img2 {
+
+    width: 25px;
+    height: 25px;
+    margin: 0px 25px 25px 0px;
+
+}
+
+
+.Login {
+    list-style-type: none;
+    font-size: 8px;
+    margin: 0px 0px 0px 80px;
+}
+
+.SignUp {
+    list-style-type: none;
+    font-size: 8px;
+    margin: 0px 0px 0px 80px;
+}
+
+
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
