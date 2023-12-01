@@ -59,7 +59,15 @@
     margin: 0px 0px 0px 80px;
 }
 
+.dropdown-toggle {
+    display: flex;
+    align-items: center;
+}
 
+.dropdown-menu {
+    overflow-y: scroll;
+    max-height: 400px;
+}
 
 @keyframes App-logo-spin {
   from {
