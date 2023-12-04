@@ -1,9 +1,9 @@
 import React from 'react';
 import logo from '../IMDBClone.png';
-import ProfileIcon from '../ProfileIcon.png';
+// import ProfileIcon from '../ProfileIcon.png';
 import '../App.css';
 
-export const NavBar = () => {
+export const NavBar = ({ loggedIn }) => {
     const genres = [
         'Action',
         'Adventure',
@@ -37,7 +37,7 @@ export const NavBar = () => {
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <img src={logo} className="img1" />
+            <img src={logo} className="img1" alt="logo" />
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
             </button>
@@ -51,64 +51,44 @@ export const NavBar = () => {
 
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav mr-auto">
-                    <li className="nav-item active">
-                        <a className="nav-link" href="#">Movies <span className="sr-only"></span></a>
+                    <li className="nav-item">
+                        <a className="nav-link" href="/#">Movies <span className="sr-only"></span></a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="#">Series</a>
+                        <a className="nav-link" href="/#">Series</a>
                     </li>
                     <li className="nav-item dropdown">
-                        <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a className="nav-link dropdown-toggle" href="/#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Genres
                         </a>
                         <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                             {genres.map(genre => {
-                                return <a key={genre} className="dropdown-item" href="#">{genre}</a>;
+                                return <a key={genre} className="dropdown-item" href="/#">{genre}</a>;
                             })}
                         </div>
                     </li>
-                    {/* <Dropdown>
-                        <Dropdown.Toggle variant="success" id="dropdown-basic">
-                            Dropdown Button
-                        </Dropdown.Toggle>
-
-                        <Dropdown.Menu>
-                            <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                            <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-                        </Dropdown.Menu>
-                    </Dropdown> */}
-
-
                     <li className="nav-item">
-                        <a className="nav-link Actors" href="#">Actors</a>
+                        <a className="nav-link Actors" href="/#">Actors</a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link Bookmark" href="#">Bookmarks</a>
+                        <a className="nav-link Bookmark" href="/#">Bookmarks</a>
                     </li>
 
                     <li className="nav-item">
-                        <a className="nav-link Game" href="#"> Game</a>
+                        <a className="nav-link Game" href="/#"> Game</a>
 
                     </li>
-                    <ul>
-                    <li className="Login">
-                        <a className="nav-link Login"href="#"> Login</a>
-                    
-                        </li>
-                   
-                    <li className="SignUp">
-                       
-                        <a className="nav-link SignUp" href="#"> SignUp</a>
 
-                        </li>
-                    </ul>
+                    {loggedIn ?
+                        <a onClick={() => localStorage.clear()} className='nav-link' href="/login">{localStorage.getItem('username')} - Logout</a>
+                    :
+                        <div className='login-signup-container'>
+                            <a className="nav-link Login" href="/login">Login</a>
+                            <a className="nav-link SignUp" href="/signup">SignUp</a>
+                        </div>
+                    }
                     
-                    
-
-                    <img src={ProfileIcon} className="img2" alt='profile' />
-
-                  
+                    {/* <img src={ProfileIcon} className="img2" alt='profile' /> */}
 
                 </ul>
                 
