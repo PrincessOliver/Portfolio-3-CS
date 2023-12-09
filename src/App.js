@@ -16,19 +16,24 @@ import {
 } from "react-router-dom";
 import Signup from './pages/Signup';
 import Login from './pages/Login';
-import { Homepage } from './pages/Homepage';
+import { Homepage } from './pages/Movies';
+import { Movie } from './pages/Movie';
+import { RatingHistory } from './pages/RatingHistory';
+import { Bookmarks } from './pages/Bookmarks';
 
 function App() {
+    
     return(
-        <>
-            <Router>
-                <Routes>
-                    <Route path="/" element={ <Homepage /> } />
-                    <Route path="/signup" element={ <Signup /> } />
-                    <Route path="/login" element={<Login />} />
-                </Routes>
-            </Router>
-        </>
+        <Router>
+            <Routes>
+                <Route path="/" element={ <Homepage /> } />
+                <Route path="/movie" element={ <Movie /> } />
+                <Route path="/rating-history" element={ <RatingHistory /> } />
+                <Route path="/bookmarks" element={ <Bookmarks /> } />
+                <Route path="/signup" element={ <Signup /> } />
+                <Route path="/login" element={<Login />} />
+            </Routes>
+        </Router>
   );
 }
 

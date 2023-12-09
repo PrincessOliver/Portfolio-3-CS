@@ -1,9 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import { NavBar } from '../components/NavBar';
+import { useEffect } from "react";
 
 const Login = () => {
     const navigate = useNavigate();
 
+    useEffect(() => {
+        if (localStorage.getItem('token') !== null) {
+            navigate('/')
+        }
+    })
+    
     let user = { username: null, password: null }
 
     const handleChange = ({ target: { name, value } }) => {
@@ -27,8 +34,9 @@ const Login = () => {
         const json = await res.json()
 
         if (res.ok) {
-            localStorage.setItem('username', json.userName)
-            localStorage.setItem('token', json.token) 
+            localStorage.setItem('userId', json.id)
+            localStorage.setItem('userName', json.userName)
+            localStorage.setItem('token', json.token)
             navigate("/")
         }
     }
