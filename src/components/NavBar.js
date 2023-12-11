@@ -2,6 +2,7 @@ import React from 'react';
 import logo from '../IMDBClone.png';
 // import ProfileIcon from '../ProfileIcon.png';
 import '../App.css';
+import { Bookmarks } from '../pages/Bookmarks';
 
 export const NavBar = ({ loggedIn }) => {
     const genres = [
@@ -65,7 +66,7 @@ export const NavBar = ({ loggedIn }) => {
                         </a>
                         <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                             {genres.map(genre => {
-                                return <a key={genre} className="dropdown-item" href="/#">{genre}</a>;
+                                return <a key={genre} className="dropdown-item" href={genre}>{genre}</a>;
                             })}
                         </div>
                     </li>
@@ -73,7 +74,7 @@ export const NavBar = ({ loggedIn }) => {
                         <a className="nav-link Actors" href="/#">Actors</a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link Bookmark" href="/#">Bookmarks</a>
+                        <a className="nav-link Bookmark" href="/bookmarks">Bookmarks</a>                    
                     </li>
 
                     <li className="nav-item">
