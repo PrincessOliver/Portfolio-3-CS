@@ -8,7 +8,7 @@ export const Bookmarks = () => {
     const loggedIn = localStorage.length > 0;
 
     useEffect(() => {
-        getBookmarks('http://localhost:5001/api/bookmarks/13/');
+        getBookmarks('http://localhost:5001/api/bookmarks/31');
     }, [id])
 
     const getBookmarks = async (endpoint) => {
@@ -38,10 +38,10 @@ export const Bookmarks = () => {
                             <div className="col-md-4 mb-4" key={index}>
                                 <div className="card">                                    
                                     <div className="card-body">
-                                        <h5 className="card-bookmark">{bookmark.id}</h5>
-                                        <h5 className="card-bookmark">{bookmark.bookmarkId}</h5>
-                                        <h5 className="card-bookmark">{bookmark.titleId}</h5>
-                                        <h5 className="card-bookmark">{bookmark.usernote}</h5>
+                                        <h5 className="card-bookmark">User Id{bookmark.userId}</h5>
+                                        <h5 className="card-bookmark">Bookmark Id{bookmark.bookmarkId}</h5>
+                                        <h5 className="card-bookmark">Title Id{bookmark.titleId}</h5>
+                                        <h5 className="card-bookmark">User Note{bookmark.userNote}</h5>
                                     </div>
                                 </div>
                             </div>
