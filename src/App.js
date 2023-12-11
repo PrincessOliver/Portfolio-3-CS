@@ -17,6 +17,7 @@ import {
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import { Homepage } from './pages/Homepage';
+import { Series } from './pages/Series';
 import {Bookmarks} from './pages/Bookmarks';
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
             <Router>
                 <Routes>
                     <Route path="/" element={ <Homepage /> } />
+                    <Route path="/series" element={ <Series /> } />
                     <Route path="/signup" element={ <Signup /> } />
                     <Route path="/login" element={<Login />} />
                     <Route path="/bookmarks" element={<Bookmarks />} />
