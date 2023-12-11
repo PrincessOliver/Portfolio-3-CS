@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { NavBar } from '../components/NavBar';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -14,28 +16,37 @@ const Login = () => {
     }
 
     const handleLogin = async (e) => {
-        e.preventDefault()
-
-        const res = await fetch('http://localhost:5001/api/user/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(user)
-        })
-
-        const json = await res.json()
-
-        if (res.ok) {
-            localStorage.setItem('username', json.userName)
-            localStorage.setItem('token', json.token) 
-            navigate("/")
+        e.preventDefault();
+    
+        try {
+            const res = await fetch('http://localhost:5001/api/user/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(user),
+            });
+    
+            const json = await res.json();
+    
+            if (res.ok) {
+                localStorage.setItem('username', json.userName);
+                localStorage.setItem('token', json.token);
+                toast.success('Login successful');
+                navigate('/');
+            } else {
+                toast.error('Login failed');
+            }
+        } catch (error) {
+            toast.error('Error try again later');
         }
     }
+    
 
     return (
         <>
             <NavBar />
+            <ToastContainer />
             <form className="signup-login-form container-fluid">
                 <div className="form-group">
                     <label>Username</label>
@@ -48,7 +59,7 @@ const Login = () => {
                 <button onClick={(e) => handleLogin(e)} type="submit" className="btn btn-primary">LOGIN</button>
             </form>
         </>
-    )
+    );
 }
 
 export default Login;
