@@ -4,7 +4,9 @@ import logo from '../IMDBClone.png';
 import '../App.css';
 import { Bookmarks } from '../pages/Bookmarks';
 
-export const NavBar = ({ loggedIn }) => {
+export const NavBar = () => {
+    const loggedIn = localStorage.getItem('token') !== null
+
     const genres = [
         'Action',
         'Adventure',
@@ -55,12 +57,12 @@ export const NavBar = ({ loggedIn }) => {
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav mr-auto">
                     <li className="nav-item">
-                        <a className="nav-link" href = "/">  Movies <span className="sr-only"></span></a>
+                        <a className="nav-link" href="/">Movies <span className="sr-only"></span></a>
                     </li>
                     <li className="nav-item">
                         <a className="nav-link" href="/series"> Series</a>
                     </li>
-                    <li className="nav-item dropdown">
+                    <li className="nav-item dropdown dropdown-genres">
                         <a className="nav-link dropdown-toggle" href="/#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Genres
                         </a>
@@ -82,14 +84,28 @@ export const NavBar = ({ loggedIn }) => {
 
                     </li>
 
-                    {loggedIn ?
-                        <a onClick={() => localStorage.clear()} className='nav-link' href="/login">{localStorage.getItem('username')} - Logout</a>
+                    <div className='nav-right'>
+                    {loggedIn ? <button className='nav-item dropdown profile-btn'>
+                                <i className="bi bi-person-fill dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                                <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a className="dropdown-item" href="/bookmarks">Bookmarks</a>
+                                    <a className="dropdown-item dropdown dropdown-toggle" href="/#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">History</a>
+                                    <div className="dropdown-menu dropdown-menu-history" aria-labelledby="navbarDropdown">
+                                        <a className="dropdown-item" href="/rating-history">Rating</a>
+                                        <a className="dropdown-item" href="/#">Search</a>
+                                    </div>
+                                    <a onClick={() => localStorage.clear()} className="dropdown-item" href="/">Logout</a>
+                                </div>
+                            </button>
                     :
-                        <div className='login-signup-container'>
-                            <a className="nav-link Login" href="/login">Login</a>
-                            <a className="nav-link SignUp" href="/signup">SignUp</a>
-                        </div>
-                    }
+                    <div className='login-signup-btns'>
+                        <a className="nav-link Login" href="/login">Login</a>
+                        <a className="nav-link SignUp" href="/signup">SignUp</a>
+                    </div>
+                    }  
+                    </div>
+                    
+                    
                     
                     {/* <img src={ProfileIcon} className="img2" alt='profile' /> */}
 

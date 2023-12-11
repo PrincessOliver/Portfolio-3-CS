@@ -2,10 +2,17 @@ import { useNavigate } from "react-router-dom";
 import { NavBar } from '../components/NavBar';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useEffect } from "react";
 
 const Login = () => {
     const navigate = useNavigate();
 
+    useEffect(() => {
+        if (localStorage.getItem('token') !== null) {
+            navigate('/')
+        }
+    })
+    
     let user = { username: null, password: null }
 
     const handleChange = ({ target: { name, value } }) => {
@@ -16,29 +23,23 @@ const Login = () => {
     }
 
     const handleLogin = async (e) => {
-        e.preventDefault();
-    
-        try {
-            const res = await fetch('http://localhost:5001/api/user/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(user),
-            });
-    
-            const json = await res.json();
-    
-            if (res.ok) {
-                localStorage.setItem('username', json.userName);
-                localStorage.setItem('token', json.token);
-                toast.success('Login successful');
-                navigate('/');
-            } else {
-                toast.error('Login failed');
-            }
-        } catch (error) {
-            toast.error('Error try again later');
+        e.preventDefault()
+
+        const res = await fetch('http://localhost:5001/api/user/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+
+        const json = await res.json()
+
+        if (res.ok) {
+            localStorage.setItem('userId', json.id)
+            localStorage.setItem('userName', json.userName)
+            localStorage.setItem('token', json.token)
+            navigate("/")
         }
     }
     

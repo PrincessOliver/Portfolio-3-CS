@@ -1,3 +1,9 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 .navbar-nav > li {
     padding-left: 15px;
     padding-right: 15px;
@@ -16,10 +22,42 @@
 
 }
 
-.login-signup-container {
+.nav-right {
+    position: absolute;
+    right: 20px;
+    height: 100%;
+    top: 0;
+    display: flex;
+    align-items: center;
+}
+
+.login-signup-btns {
     display: flex;
     flex-direction: row;
-    margin-left: 59px;
+}
+
+.profile-btn {
+    background: none;
+    border: none;
+    outline: none;
+}
+
+.profile-btn:focus {
+    outline: none;
+}
+
+.bi-person-fill {
+    font-size: 1.8rem;
+    cursor: pointer;
+}
+
+.profile-btn > .dropdown-toggle:empty::after {
+    font-size: 1.1rem;
+}
+
+.profile-btn > .dropdown-menu {
+    left: -100px;
+    top: 40px;
 }
 
 .Login {
@@ -38,9 +76,13 @@
     align-items: center;
 }
 
-.dropdown-menu {
+.dropdown-genres > .dropdown-menu {
     overflow-y: scroll;
     max-height: 400px;
+}
+
+.dropdown-menu-history {
+    top: 70px;
 }
 
 .signup-login-form {
@@ -56,9 +98,24 @@
     text-align: left;
 }
 
+.card:hover{
+    filter: brightness(0.9);
+    cursor: pointer;
+}
+
+.card-body > button {
+    cursor: pointer;
+}
+
 @media (max-width: 992px) {
-    .login-signup-container {
+    .nav-right {
+        position: unset;
         margin-left: 15px;
+        flex-direction: column;
+        align-items: normal;
+    }
+
+    .login-signup-btns {
         flex-direction: column;
     }
 }
