@@ -17,9 +17,9 @@ import {
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import { Homepage } from './pages/Homepage';
-import Bookmarkspage from './pages/Bookmarkspage';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
+import {Bookmarks} from './pages/Bookmarks';
 
 function App() {
     return(
@@ -30,6 +30,7 @@ function App() {
                     <Route path="/" element={ <Homepage /> } />
                     <Route path="/signup" element={ <Signup /> } />
                     <Route path="/login" element={<Login />} />
+                    <Route path="/bookmarks" element={<Bookmarks />} />
                 </Routes>
             </Router>
         </>
