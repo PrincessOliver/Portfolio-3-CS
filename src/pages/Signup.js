@@ -1,20 +1,22 @@
 import { NavBar } from '../components/NavBar';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Signup = () => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
-    let user = { username: null, password: null }
+    let user = { username: null, password: null };
 
     const handleChange = ({ target: { name, value } }) => {
         user = {
             ...user,
             [name]: value
-        }
-    }
+        };
+    };
 
     const handleSignup = async (e) => {
-        e.preventDefault()
+        e.preventDefault();
 
         const res = await fetch('http://localhost:5001/api/user', {
             method: 'POST',
@@ -22,18 +24,27 @@ const Signup = () => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(user)
-        })
-        const json = await res.json()
-        console.log(json)
+        });
 
-        if (res.ok) {
-            navigate('/login')
+        try {
+            const json = await res.json();
+            console.log(json);
+
+            if (res.ok) {
+                navigate('/login');
+                toast.success('Signup successful');
+            } else {
+                toast.error('Signup failed');
+            }
+        } catch (error) {
+            toast.error('Error, try again later');
         }
-    }
+    };
 
     return (
         <>
             <NavBar />
+            <ToastContainer />
             <form className="signup-login-form container-fluid">
                 <div className="form-group">
                     <label>Username</label>
@@ -43,10 +54,12 @@ const Signup = () => {
                     <label>Password</label>
                     <input onChange={(e) => handleChange(e)} name="password" type="password" className="form-control" placeholder="Password" />
                 </div>
-                <button onClick={(e) => handleSignup(e)} type="submit" className="btn btn-primary">SIGNUP</button>
+                <button onClick={(e) => handleSignup(e)} type="submit" className="btn btn-primary">
+                    SIGNUP
+                </button>
             </form>
         </>
-    )
-}
+    );
+};
 
 export default Signup;

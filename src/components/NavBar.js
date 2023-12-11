@@ -55,10 +55,10 @@ export const NavBar = ({ loggedIn }) => {
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav mr-auto">
                     <li className="nav-item">
-                        <a className="nav-link" href="/#">Movies <span className="sr-only"></span></a>
+                        <a className="nav-link" href = "/">  Movies <span className="sr-only"></span></a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="/#">Series</a>
+                        <a className="nav-link" href="/series"> Series</a>
                     </li>
                     <li className="nav-item dropdown">
                         <a className="nav-link dropdown-toggle" href="/#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

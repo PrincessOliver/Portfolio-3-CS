@@ -1,18 +1,18 @@
 import { NavBar } from "../components/NavBar";
 import React, { useEffect, useState } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css'; 
-export const Homepage = () => {
+
+export const Series = () => {
     const [shownTitles, setShownTitles] = useState([]);
     const [page, setPage] = useState(0);
 
     const loggedIn = localStorage.length > 0;
 
     useEffect(() => {
-        getTitles('http://localhost:5001/api/titles/movies');
+        getTitles('http://localhost:5001/api/titles/series');
     }, []);
 
     useEffect(() => {
-        getTitles(`http://localhost:5001/api/titles/movies?page=${page}&pageSize=10`)
+        getTitles(`http://localhost:5001/api/titles/series?page=${page}&pageSize=10`)
     }, [page])
 
     const getTitles = async (endpoint) => {
