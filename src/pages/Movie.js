@@ -15,13 +15,23 @@ export const Movie = () => {
                 const json2 = await res2.json()
                 
                 setMovie({
-                    type: json.type,
                     primaryTitle: json.primaryTitle,
+                    type: json.type,
                     startYear: json.startYear,
                     endYear: json.endYear,
-                    omdbTitle: json.omdbTitle,
-                    omdbYear: json.omdbYear,
                     omdbReleaseDate: json.omdbReleaseDate,
+                    awards: json.awards,
+                    rated: json.rated,
+                    year: json.year,
+                    runtime: json.runtime,
+                    poster: json.poster,
+                    director: json.director,
+                    totalSeasons: json.totalSeasons,
+                    boxOffice: json.boxOffice,
+                    country: json.country,
+                    actors: json.actors,
+                    writer: json.writer,
+                    weightAvgRating: json.weightAvgRating,
                     rating: json2.rating
                 })
             }
@@ -55,22 +65,30 @@ export const Movie = () => {
         <>
             <NavBar />
             {movie && <div className="movie">
-                <img src={localStorage.getItem('clickedTitle')} alt='poster' />
-                <p>type: {movie.type}</p>
+                <img src={movie.poster} alt='poster' />
                 <p>primaryTitle: {movie.primaryTitle}</p>
+                <p>type: {movie.type}</p>
                 <p>startYear: {movie.startYear}</p>
-                <p>endYear: {movie.endYear}</p>
-                <p>omdbTitle: {movie.omdbTitle}</p>
-                <p>omdbYear: {movie.omdbYear}</p>
+                {movie.endYear.trim().length !== 0 && <p>endYear: {movie.endYear}</p>}
                 <p>omdbReleaseDate: {movie.omdbReleaseDate}</p>
-                <span>Rate</span>
+                <p>awards: {movie.awards}</p>
+                <p>rated: {movie.rated}</p>
+                <p>year: {movie.year}</p>
+                <p>runtime: {movie.runtime}</p>
+                <p>director: {movie.director}</p>
+                <p>totalSeasons: {movie.totalSeasons}</p>
+                <p>boxOffice: {movie.boxOffice}</p>
+                <p>country: {movie.country}</p>
+                <p>actors: {movie.actors}</p>
+                <p>writer: {movie.writer}</p>
+                <p>weightAvgRating: {movie.weightAvgRating}</p>
                 <ReactStars
                     count={10}
                     onChange={ratingChanged}
                     size={30}
                     activeColor="#ffd700"
                     value={movie.rating}
-                />,
+                />
             </div>
             }
         </>
