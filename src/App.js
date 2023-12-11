@@ -17,12 +17,14 @@ import {
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import { Homepage } from './pages/Homepage';
-import { Series } from './pages/Series';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
 import {Bookmarks} from './pages/Bookmarks';
-
+import { Series } from './pages/Series';
 function App() {
     return(
-        <>
+        <>          
+            <ToastContainer />
             <Router>
                 <Routes>
                     <Route path="/" element={ <Homepage /> } />
