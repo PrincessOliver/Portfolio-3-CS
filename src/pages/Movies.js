@@ -1,6 +1,9 @@
 import { NavBar } from "../components/NavBar";
 import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
+import noPoster from '../Information_Missing_Mock_MC_Patch.jpg'; 
+
+
 export const Homepage = () => {
     const [shownTitles, setShownTitles] = useState([]);
     const [page, setPage] = useState(0);
@@ -69,7 +72,7 @@ export const Homepage = () => {
                                     }}
                                     className="card"
                                 >
-                                    <img className="card-img-top" src={title.poster} alt="poster" />
+                                    <img className="card-img-top" src={title.poster !=='N/A' ? title.poster : noPoster} alt="poster" />
                                     <div className="card-body">
                                         <h5 className="card-title">{title.name}</h5>
                                         <p className="card-text">{Math.round(title.weightAvgRating * 10) / 10}/10</p>
