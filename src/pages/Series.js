@@ -37,7 +37,7 @@ export const Series = () => {
                 {page > 0 && <button onClick={() => { if (page > 0) { setPage(page -1) }}}>Prev</button>}
                 <button onClick={() => setPage(page + 1)}>Next</button>
                 <div className="container mt-4">
-                    <h2>Movie Titles</h2>
+                    <h2>Series Titles</h2>
                     <div className="row">
                         {shownTitles.map((title, index) => (
                             <div className="col-md-4 mb-4" key={index}>

@@ -2,7 +2,13 @@ import { NavBar } from "../components/NavBar";
 import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import noPoster from '../Information_Missing_Mock_MC_Patch.jpg'; 
-
+import {
+    BrowserRouter as Router,
+    Link,
+    Routes,
+    Route, 
+    Outlet
+} from "react-router-dom";
 
 export const Homepage = () => {
     const [shownTitles, setShownTitles] = useState([]);
@@ -84,6 +90,9 @@ export const Homepage = () => {
                     </div>
                 </div>
             </div>
+                                                    <div>
+                                                    <Outlet/> 
+                                                    </div>
         </>
     );
 };

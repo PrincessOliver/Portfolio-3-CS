@@ -2,6 +2,14 @@ import React from 'react';
 import logo from '../IMDBClone.png';
 // import ProfileIcon from '../ProfileIcon.png';
 import '../App.css';
+import {
+    BrowserRouter as Router,
+    Link,
+    Routes,
+    Route,
+    Outlet,
+} from "react-router-dom";
+import { Movies } from '../pages/Movies';
 
 export const NavBar = () => {
     const loggedIn = localStorage.getItem('token') !== null
@@ -39,6 +47,7 @@ export const NavBar = () => {
     ]
 
     return (
+        
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <a href="/">
             <img src={logo} className="img1" alt="logo" />
@@ -57,7 +66,7 @@ export const NavBar = () => {
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav mr-auto">
                     <li className="nav-item">
-                    <a className="nav-link" href="/">Movies <span className="sr-only"></span></a>
+                    <a className="nav-link" ><Link to = "/">Movies</Link> <span className="sr-only"></span></a>
                     </li>
                     <li className="nav-item">
                         <a className="nav-link" href="/series"> Series</a>
@@ -115,5 +124,7 @@ export const NavBar = () => {
                 
             </div>
         </nav>
+       
+    
     )
-}
+}  

@@ -54,9 +54,10 @@ function App() {
             <ToastContainer />
             <Router>
                 <Routes>
-                    <Route path="/" element={ <Homepage /> } />
+                    <Route path="/" element={ <Homepage /> }>
+                      <Route path="movie" element={ <Movie /> } />
+                    </Route>
                     <Route path="/series" element={ <Series /> } />
-                    <Route path="/movie" element={ <Movie /> } />
                     <Route path="/rating-history" element={ <RatingHistory /> } />
                     <Route path="/signup" element={ <Signup /> } />
                     <Route path="/login" element={<Login />} />
