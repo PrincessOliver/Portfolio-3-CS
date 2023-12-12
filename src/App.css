@@ -4,6 +4,34 @@
     padding: 0;
 }
 
+.loader {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: #fff;
+    box-shadow: 32px 0 #fff, -32px 0 #fff;
+    position: absolute;
+    animation: flash 0.5s ease-out infinite alternate;
+  }
+  
+  @keyframes flash {
+    0% {
+      background-color: #FFF2;
+      box-shadow: 32px 0 #FFF2, -32px 0 #FFF;
+    }
+    50% {
+      background-color: #FFF;
+      box-shadow: 32px 0 #FFF2, -32px 0 #FFF2;
+    }
+    100% {
+      background-color: #FFF2;
+      box-shadow: 32px 0 #FFF, -32px 0 #FFF2;
+    }
+}    
+    
 .navbar-nav > li {
     padding-left: 15px;
     padding-right: 15px;
@@ -56,7 +84,7 @@
 }
 
 .profile-btn > .dropdown-menu {
-    left: -100px;
+    left: -110px;
     top: 40px;
 }
 
@@ -105,6 +133,17 @@
 
 .card-body > button {
     cursor: pointer;
+}
+
+.search-results {
+    width: 288.02px;
+    height: auto;
+    position: absolute;
+    z-index: 1;
+    background-color: gray;
+    border-radius: 0.375rem;
+    min-height: 100px;
+    top: 63px;
 }
 
 @media (max-width: 992px) {

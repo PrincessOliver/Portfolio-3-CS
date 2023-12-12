@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import logo from '../IMDBClone.png';
 // import ProfileIcon from '../ProfileIcon.png';
 import '../App.css';
@@ -6,6 +6,25 @@ import '../App.css';
 export const NavBar = () => {
     const loggedIn = localStorage.getItem('token') !== null
     const userName = localStorage.getItem('userName')
+
+    const [ searchVal, setSearchVal ] = useState(null)
+    const [ searchRes, setSearchRes ] = useState(null)
+
+    useEffect(() => {
+        let delay
+        if (searchVal) {
+            delay = setTimeout(async () => {
+                let res = await fetch(`http://localhost:5001/api/titles/search/${localStorage.getItem('userId')}/${searchVal}`)
+                let json = await res.json()
+                setSearchRes(json)
+            }, 1000)
+        }
+      
+        return () => {
+            clearTimeout(delay)
+            setSearchRes(null)
+        }
+    }, [searchVal])
 
     const genres = [
         'Action',
@@ -47,12 +66,19 @@ export const NavBar = () => {
                 <span className="navbar-toggler-icon"></span>
             </button>
 
-            <form className="form-inline my-2 my-lg-0">
-                <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"></input>
-                <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-
-                
-            </form>
+            <div>
+                <form className="form-inline my-2 my-lg-0">
+                    <input onChange={(e) => setSearchVal(e.target.value)}className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"></input>
+                    <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+                {searchVal ?
+                    <div className='search-results'>
+                        {searchRes ? searchRes.map((item, index) => {
+                            return <div key={index}>{item.searchString}</div>
+                          })  : <span className='loader'></span>}
+                    </div> 
+                : null}
+            </div>
 
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav mr-auto">
