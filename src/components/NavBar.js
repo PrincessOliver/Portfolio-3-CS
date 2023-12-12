@@ -2,10 +2,10 @@ import React from 'react';
 import logo from '../IMDBClone.png';
 // import ProfileIcon from '../ProfileIcon.png';
 import '../App.css';
-import { Bookmarks } from '../pages/Bookmarks';
 
 export const NavBar = () => {
     const loggedIn = localStorage.getItem('token') !== null
+    const userName = localStorage.getItem('userName')
 
     const genres = [
         'Action',
@@ -57,7 +57,7 @@ export const NavBar = () => {
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav mr-auto">
                     <li className="nav-item">
-                        <a className="nav-link" href="/">Movies <span className="sr-only"></span></a>
+                    <a className="nav-link" href="/">Movies <span className="sr-only"></span></a>
                     </li>
                     <li className="nav-item">
                         <a className="nav-link" href="/series"> Series</a>
@@ -85,7 +85,8 @@ export const NavBar = () => {
                     </li>
 
                     <div className='nav-right'>
-                    {loggedIn ? <button className='nav-item dropdown profile-btn'>
+                    {loggedIn ? <> <div className='username'> {userName} </div>
+                            <button className='nav-item dropdown profile-btn'>
                                 <i className="bi bi-person-fill dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
                                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a className="dropdown-item" href="/bookmarks">Bookmarks</a>
@@ -97,6 +98,7 @@ export const NavBar = () => {
                                     <a onClick={() => localStorage.clear()} className="dropdown-item" href="/">Logout</a>
                                 </div>
                             </button>
+                            </>
                     :
                     <div className='login-signup-btns'>
                         <a className="nav-link Login" href="/login">Login</a>
