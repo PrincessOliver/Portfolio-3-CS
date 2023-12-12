@@ -10,7 +10,7 @@ import {
     Outlet
 } from "react-router-dom";
 
-export const Homepage = () => {
+export const Movies = () => {
     const [shownTitles, setShownTitles] = useState([]);
     const [page, setPage] = useState(0);
 
@@ -90,9 +90,6 @@ export const Homepage = () => {
                     </div>
                 </div>
             </div>
-                                                    <div>
-                                                    <Outlet/> 
-                                                    </div>
         </>
     );
 };

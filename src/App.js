@@ -21,9 +21,10 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 import {Bookmarks} from './pages/Bookmarks';
 import { Series } from './pages/Series';
-import { Homepage } from './pages/Movies';
+import { Movies } from './pages/Movies';
 import { Movie } from './pages/Movie';
 import { RatingHistory } from './pages/RatingHistory';
+import { Media } from './pages/Media';
 
 
 
@@ -39,12 +40,12 @@ function App() {
         <>       
             <Router>
       <nav>
-        <Link to="/home"> Home </Link>
+        <Link to="/birdman"> Home </Link>
         <Link to="logins"> Login </Link>
         <Link to="products/search"> Products </Link>
       </nav>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/birdman" element={<Home />} />
         <Route path="logins" element={<Logins />} />
         <Route path="products" element={<Products />}>
           <Route path="search" element={<Search />} />
@@ -54,10 +55,11 @@ function App() {
             <ToastContainer />
             <Router>
                 <Routes>
-                    <Route path="/" element={ <Homepage /> }>
+                    <Route path="/" element ={<Media/>}>
+                      <Route path="movies" element={ <Movies /> } />
                       <Route path="movie" element={ <Movie /> } />
+                      <Route path="series" element={ <Series /> } />
                     </Route>
-                    <Route path="/series" element={ <Series /> } />
                     <Route path="/rating-history" element={ <RatingHistory /> } />
                     <Route path="/signup" element={ <Signup /> } />
                     <Route path="/login" element={<Login />} />

@@ -9,7 +9,6 @@ import {
     Route,
     Outlet,
 } from "react-router-dom";
-import { Movies } from '../pages/Movies';
 
 export const NavBar = () => {
     const loggedIn = localStorage.getItem('token') !== null
@@ -66,10 +65,10 @@ export const NavBar = () => {
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav mr-auto">
                     <li className="nav-item">
-                    <a className="nav-link" ><Link to = "/">Movies</Link> <span className="sr-only"></span></a>
+                    <a className="nav-link" ><Link to = "/movies"> Movies </Link> <span className="sr-only"></span></a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="/series"> Series</a>
+                        <a className="nav-link">  <Link to = "/Series"> Series </Link></a>
                     </li>
                     <li className="nav-item dropdown dropdown-genres">
                         <a className="nav-link dropdown-toggle" href="/#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
