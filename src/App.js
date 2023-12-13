@@ -24,6 +24,8 @@ import { Homepage } from './pages/Movies';
 import { Movie } from './pages/Movie';
 import { RatingHistory } from './pages/RatingHistory';
 
+import GenrePage from './pages/GenrePage';
+
 function App() {
     
     return(
@@ -34,6 +36,7 @@ function App() {
                     <Route path="/" element={ <Homepage /> } />
                     <Route path="/series" element={ <Series /> } />
                     <Route path="/movie" element={ <Movie /> } />
+                    <Route path="/genre/:genre" element={<GenrePage />} />
                     <Route path="/rating-history" element={ <RatingHistory /> } />
                     <Route path="/signup" element={ <Signup /> } />
                     <Route path="/login" element={<Login />} />
