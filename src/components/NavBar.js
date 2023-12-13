@@ -11,18 +11,25 @@ export const NavBar = () => {
     const [ searchRes, setSearchRes ] = useState(null)
 
     useEffect(() => {
-        let delay
-        if (searchVal) {
-            delay = setTimeout(async () => {
-                let res = await fetch(`http://localhost:5001/api/titles/search/${localStorage.getItem('userId')}/${searchVal}`)
-                let json = await res.json()
-                setSearchRes(json)
-            }, 1000)
-        }
-      
-        return () => {
-            clearTimeout(delay)
-            setSearchRes(null)
+        try {
+            const endpoint = loggedIn ? `http://localhost:5001/api/titles/search-loggedin/${localStorage.getItem('userId')}/${searchVal}`
+                : `http://localhost:5001/api/titles/search/${searchVal}`
+            let delay
+            if (searchVal) {
+                delay = setTimeout(async () => {
+                    let res = await fetch(endpoint)
+                    let json = await res.json()
+                    setSearchRes(json)
+                }, 1000)
+            }
+          
+            return () => {
+                clearTimeout(delay)
+                setSearchRes(null)
+            }
+        } 
+        catch (err) {
+            console.log(err)
         }
     }, [searchVal])
 
@@ -73,9 +80,11 @@ export const NavBar = () => {
                 </form>
                 {searchVal ?
                     <div className='search-results'>
-                        {searchRes ? searchRes.map((item, index) => {
+                        {!searchRes && <span className='loader center'></span>}
+                        {searchRes && searchRes.length > 0 && searchRes.map((item, index) => {
                             return <div key={index}>{item.searchString}</div>
-                          })  : <span className='loader'></span>}
+                        })}
+                        {searchRes && searchRes.length === 0 && <div className='center'>no results</div>}
                     </div> 
                 : null}
             </div>
