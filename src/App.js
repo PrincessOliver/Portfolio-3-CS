@@ -26,34 +26,16 @@ import { Movie } from './pages/Movie';
 import { RatingHistory } from './pages/RatingHistory';
 import { Media } from './pages/Media';
 
-
-
-import "./App.css";
-import Home from "./pages/test2";
-import Products from "./pages/test1";
-import Logins from "./pages/test3";
-import Search from "./pages/test4";
-
 function App() {
     
     return(
-        <>       
-            <Router>
-      <nav>
-        <Link to="/birdman"> Home </Link>
-        <Link to="logins"> Login </Link>
-        <Link to="products/search"> Products </Link>
-      </nav>
-      <Routes>
-        <Route path="/birdman" element={<Home />} />
-        <Route path="logins" element={<Logins />} />
-        <Route path="products" element={<Products />}>
-          <Route path="search" element={<Search />} />
-        </Route>
-      </Routes>
-    </Router>   
+        <>        
+      
             <ToastContainer />
             <Router>
+              <nav>
+          <Link to = "/movies"> Movies </Link>
+              </nav>
                 <Routes>
                     <Route path="/" element ={<Media/>}>
                       <Route path="movies" element={ <Movies /> } />

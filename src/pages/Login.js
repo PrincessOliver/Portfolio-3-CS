@@ -9,7 +9,7 @@ const Login = () => {
 
     useEffect(() => {
         if (localStorage.getItem('token') !== null) {
-            navigate('/')
+            navigate('/movies')
         }
     })
     
@@ -39,7 +39,7 @@ const Login = () => {
             localStorage.setItem('userId', json.id)
             localStorage.setItem('userName', json.userName)
             localStorage.setItem('token', json.token)
-            navigate("/")
+            navigate("/movies")
         }
     }
     

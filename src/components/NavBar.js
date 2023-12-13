@@ -103,7 +103,7 @@ export const NavBar = () => {
                                         <a className="dropdown-item" href="/rating-history">Rating</a>
                                         <a className="dropdown-item" href="/#">Search</a>
                                     </div>
-                                    <a onClick={() => localStorage.clear()} className="dropdown-item" href="/">Logout</a>
+                                    <a onClick={() => localStorage.clear()} className="dropdown-item" href="/movies">Logout</a>
                                 </div>
                             </button>
                             </>
