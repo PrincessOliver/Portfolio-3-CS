@@ -57,7 +57,7 @@ const Login = () => {
                 navigate('/');
                 toast.success('Login Successfully');
             } else {
-                const errorMessage = json.message || 'Invalid username or password.';
+                const errorMessage = json.message || 'Invalid username or password';
                 toast.error(errorMessage);
             }
         } catch (error) {
