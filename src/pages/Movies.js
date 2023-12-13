@@ -62,7 +62,7 @@ export const Movies = () => {
 
     return (
         <>
-            <NavBar />
+            
             <div>
                 {page > 0 && <button onClick={() => { if (page > 0) { setPage(page -1) }}}>Prev</button>}
                 <button onClick={() => setPage(page + 1)}>Next</button>

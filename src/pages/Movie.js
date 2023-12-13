@@ -63,7 +63,7 @@ export const Movie = () => {
 
     return (
         <>
-            <NavBar />
+            
             {movie && <div className="movie">
                 <img src={movie.poster} alt='poster' />
                 <p>primaryTitle: {movie.primaryTitle}</p>
