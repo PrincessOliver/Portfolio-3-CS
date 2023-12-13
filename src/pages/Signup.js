@@ -9,6 +9,8 @@ const Signup = () => {
     const [user, setUser] = useState({ username: '', password: '' });
     const [isLoading, setIsLoading] = useState(false);
 
+    const minLength = 6;
+
     const handleChange = (e) => {
         setUser({
             ...user,
@@ -20,12 +22,25 @@ const Signup = () => {
         e.preventDefault();
 
         if (!user.username || !user.password) {
-            toast.error('Username and password are required.');
+            toast.error('Username and password are required');
+            return;
+        }
+
+        if (user.password.length < minLength) {
+            toast.error(`Password must be at least ${minLength} characters`);
             return;
         }
 
         try {
             setIsLoading(true);
+
+            const checkUsernameRes = await fetch(`http://localhost:5001/api/user/${user.username}`);
+            const checkUsernameJson = await checkUsernameRes.json();
+
+            if (checkUsernameRes.ok && checkUsernameJson) {
+                toast.error('Username is already in use, please choose another username');
+                return;
+            }
 
             const res = await fetch('http://localhost:5001/api/user', {
                 method: 'POST',
