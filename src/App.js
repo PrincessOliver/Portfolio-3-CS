@@ -27,6 +27,8 @@ import { Movie } from './pages/Movie';
 import { RatingHistory } from './pages/RatingHistory';
 import { Media } from './pages/Media';
 
+import GenrePage from './pages/GenrePage';
+
 function App() {
   const loggedIn = localStorage.getItem('token') !== null
   const userName = localStorage.getItem('userName')
