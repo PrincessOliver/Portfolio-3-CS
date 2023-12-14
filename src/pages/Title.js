@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import ReactStars from "react-rating-stars-component";
+import { ToastContainer, toast } from 'react-toastify';
 
 export const Title = () => {
     const [ movie, setMovie ] = useState(null)
@@ -74,8 +75,10 @@ export const Title = () => {
                 })
             })
             const json = await res.json()
-
-            console.log(json)
+            
+            if (json) {
+                toast.success('Added to bookmarks');
+            }
         }
         catch (err) {
             console.log(err)
@@ -84,6 +87,7 @@ export const Title = () => {
 
     return (
         <> 
+            <ToastContainer />
             {movie && <div className="movie">
                 <img src={movie.poster} alt='poster' />
                 <p>primaryTitle: {movie.primaryTitle}</p>

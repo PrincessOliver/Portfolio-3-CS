@@ -146,13 +146,14 @@
     background-color: gray;
     border-radius: 0.375rem;
     min-height: 100px;
-    top: 63px;
+    top: 67px;
 }
 
 .search-result {
     padding: 10px;
     cursor: pointer;
     background-color: gray;
+    border-radius: 0.375rem;
 }
 
 .search-result:hover {
@@ -167,6 +168,51 @@
     background-color: gray;
     margin: 0 5px;
     cursor: pointer;
+}
+
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 99999;
+    top: 0;
+    z-index: 1;
+    backdrop-filter: brightness(0.5) blur(1px);
+}
+
+.confirm-modal {
+    width: 100%;
+    max-width: 350px;
+    height: 200px;
+    display: block;
+    background-color: #fff;
+}
+
+.btn-close {
+    position: absolute;
+    right: 0;
+}
+
+.confirm-modal-btns {
+    display: flex;
+    justify-content: space-between;
+}
+
+.pagination {
+    justify-content: center;
+}
+
+.pagination > li {
+    margin: 0 10px;
+}
+
+.pagination-active {
+    padding: 0 5px;
+    background-color: lightgray;
 }
 
 @media (max-width: 992px) {

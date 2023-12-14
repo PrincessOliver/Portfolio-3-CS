@@ -9,8 +9,6 @@ export const RatingHistory = () => {
                 const res = await fetch(`http://localhost:5001/api/ratings/${localStorage.getItem('userId')}`)
                 const json = await res.json()
 
-                console.log(json)
-
                 setRatings(json)
             }
             catch (err) {

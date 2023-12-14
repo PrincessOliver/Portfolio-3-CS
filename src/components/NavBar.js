@@ -105,7 +105,7 @@ export const NavBar = () => {
                         </a>
                         <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                             {genres.map(genre => {
-                                return <a key={genre} className="dropdown-item" href={'/titles/' + genre.toLocaleLowerCase()}>{genre}</a>;
+                                return <a key={genre} className="dropdown-item" href={'/titles/' + genre}>{genre}</a>;
                             })}
                         </div>
                     </li>
