@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react"
-import { NavBar } from "../components/NavBar"
 import ReactStars from "react-rating-stars-component";
 
-export const Movie = () => {
+export const Title = () => {
     const [ movie, setMovie ] = useState(null)
 
     useEffect(() => {
@@ -61,9 +60,30 @@ export const Movie = () => {
         }
     };
 
+    const addToBookmarks = async e => {
+        try {
+            e.stopPropagation()
+            const res = await fetch('http://localhost:5001/api/bookmarks', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    userId: localStorage.getItem('userId'),
+                    titleId: window.location.search.slice(1),
+                })
+            })
+            const json = await res.json()
+
+            console.log(json)
+        }
+        catch (err) {
+            console.log(err)
+        }
+    }
+
     return (
-        <>
-            
+        <> 
             {movie && <div className="movie">
                 <img src={movie.poster} alt='poster' />
                 <p>primaryTitle: {movie.primaryTitle}</p>
@@ -89,6 +109,7 @@ export const Movie = () => {
                     activeColor="#ffd700"
                     value={movie.rating}
                 />
+                <button onClick={(e) => addToBookmarks(e)}>ADD TO BOOKMARKS</button>
             </div>
             }
         </>

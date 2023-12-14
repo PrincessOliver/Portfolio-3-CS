@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import { NavBar } from '../components/NavBar';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useEffect, useState } from "react";
@@ -10,10 +9,8 @@ const Login = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
-        if (localStorage.getItem('token') !== null) {
-            navigate('/movies')
-        }
-    }, [navigate]);
+        if (localStorage.getItem('token') !== null) navigate('/')
+    }, [])
 
     const minLength = 6;
 
@@ -54,7 +51,7 @@ const Login = () => {
                 localStorage.setItem('userId', json.id);
                 localStorage.setItem('userName', json.userName);
                 localStorage.setItem('token', json.token);
-                navigate('/movies');
+                window.location.pathname = '/'
                 toast.success('Login Successfully');
             } else {
                 const errorMessage = json.message || 'Invalid username or password';
@@ -70,7 +67,6 @@ const Login = () => {
 
     return (
         <>
-            <NavBar />
             <ToastContainer />
             <form className="signup-login-form container-fluid">
                 <div className="form-group">

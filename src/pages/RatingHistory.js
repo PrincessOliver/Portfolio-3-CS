@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react"
-import { NavBar } from "../components/NavBar"
 
 export const RatingHistory = () => {
     const [ ratings, setRatings ] = useState(null)
@@ -22,7 +21,6 @@ export const RatingHistory = () => {
 
     return (
        <>
-            <NavBar />
             {ratings && ratings.map((rating, index) => {
                 return <div key={index}>
                 <p>{rating.titleId}</p>
