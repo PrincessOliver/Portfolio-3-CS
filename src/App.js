@@ -11,9 +11,11 @@ import React from 'react';
 // import Dropdown from 'react-bootstrap/Dropdown';
 import {
     BrowserRouter as Router,
+    Link,
     Routes,
     Route,
 } from "react-router-dom";
+import logo from './IMDBClone.png';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import 'react-toastify/dist/ReactToastify.css';
@@ -23,19 +25,23 @@ import { Series } from './pages/Series';
 import { Homepage } from './pages/Movies';
 import { Title } from './pages/Title';
 import { RatingHistory } from './pages/RatingHistory';
+import { Media } from './pages/Media';
 
 import GenrePage from './pages/GenrePage';
 
-function App() {    
+function App() {
+    const loggedIn = localStorage.getItem('token') !== null
+    const userName = localStorage.getItem('userName')
+
     return(
-        <>          
-            <ToastContainer />
+        <>        
             <Router>
                 <Routes>
-                    <Route path="/" element={ <Homepage /> } />
-                    <Route path="/series" element={ <Series /> } />
-                    <Route path="/title" element={ <Title /> } />
-                    <Route path='titles/:genre' element={<GenrePage />} />
+                    <Route path="/" element ={<Media/>}>
+                      <Route path="movies" element={ <Movies /> } />
+                      <Route path="movie" element={ <Movie /> } />
+                      <Route path="series" element={ <Series /> } />
+                    </Route>
                     <Route path="/rating-history" element={ <RatingHistory /> } />
                     <Route path="/signup" element={ <Signup /> } />
                     <Route path="/login" element={<Login />} />

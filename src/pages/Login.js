@@ -11,7 +11,7 @@ const Login = () => {
 
     useEffect(() => {
         if (localStorage.getItem('token') !== null) {
-            navigate('/');
+            navigate('/movies')
         }
     }, [navigate]);
 
@@ -54,7 +54,7 @@ const Login = () => {
                 localStorage.setItem('userId', json.id);
                 localStorage.setItem('userName', json.userName);
                 localStorage.setItem('token', json.token);
-                navigate('/');
+                navigate('/movies');
                 toast.success('Login Successfully');
             } else {
                 const errorMessage = json.message || 'Invalid username or password';

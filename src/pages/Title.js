@@ -85,7 +85,7 @@ export const Title = () => {
 
     return (
         <>
-            <NavBar />
+            
             {movie && <div className="movie">
                 <img src={movie.poster} alt='poster' />
                 <p>primaryTitle: {movie.primaryTitle}</p>
@@ -105,7 +105,7 @@ export const Title = () => {
                 <p>writer: {movie.writer}</p>
                 <p>weightAvgRating: {movie.weightAvgRating}</p>
                 <ReactStars
-                    count={10}
+                    count={10} // could it perhaps be a float?
                     onChange={ratingChanged}
                     size={30}
                     activeColor="#ffd700"
