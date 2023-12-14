@@ -1,5 +1,6 @@
 import { NavBar } from "../components/NavBar";
 import React, { useEffect, useState } from 'react';
+import noPoster from '../Information_Missing_Mock_MC_Patch.jpg'; 
 
 export const Bookmarks = () => {
     const [shownBookmarks, setShownBookmarks] = useState([]);
@@ -46,6 +47,8 @@ export const Bookmarks = () => {
                             <div className="col-md-4 mb-4" key={index}>
                                 <div className="card">
                                     <div className="card-body">
+                                    <img className="card-img-top" src={bookmark.omdbPoster !=='N/A' ? bookmark.omdbPoster : noPoster} alt="poster" />
+                                        <h5 className="card-bookmark"> Name :{bookmark.primaryTitle}</h5>
                                         <h5 className="card-bookmark">User Id :{bookmark.userId}</h5>
                                         <h5 className="card-bookmark">Bookmark Id :{bookmark.bookmarkId}</h5>
                                         <h5 className="card-bookmark">Title Id :{bookmark.titleId}</h5>

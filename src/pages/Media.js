@@ -13,8 +13,8 @@ export const Media = () => {
 {/* find a way to initialize the outlet on first render */}
 
 
-    <Outlet/>
-        
+<Outlet/>
+   
      
             </>
        
