@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { NavBar } from '../components/NavBar';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -8,6 +7,10 @@ const Signup = () => {
     const navigate = useNavigate();
     const [user, setUser] = useState({ username: '', password: '' });
     const [isLoading, setIsLoading] = useState(false);
+
+    useEffect(() => {
+        if (localStorage.getItem('token') !== null) navigate('/')
+    }, [])
 
     const minLength = 6;
 
@@ -69,7 +72,6 @@ const Signup = () => {
 
     return (
         <>
-            <NavBar />
             <ToastContainer />
             <form className="signup-login-form container-fluid">
                 <div className="form-group">

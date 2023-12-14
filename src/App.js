@@ -11,36 +11,33 @@ import React from 'react';
 // import Dropdown from 'react-bootstrap/Dropdown';
 import {
     BrowserRouter as Router,
-    Link,
     Routes,
     Route,
 } from "react-router-dom";
-import logo from './IMDBClone.png';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer, toast } from 'react-toastify';
 import {Bookmarks} from './pages/Bookmarks';
 import { Series } from './pages/Series';
-import { Homepage } from './pages/Movies';
+import { Movies } from './pages/Movies';
 import { Title } from './pages/Title';
 import { RatingHistory } from './pages/RatingHistory';
 import { Media } from './pages/Media';
 
 import GenrePage from './pages/GenrePage';
+import { NavBar } from './components/NavBar';
 
 function App() {
-    const loggedIn = localStorage.getItem('token') !== null
-    const userName = localStorage.getItem('userName')
-
     return(
         <>        
+            <NavBar />
             <Router>
                 <Routes>
                     <Route path="/" element ={<Media/>}>
-                      <Route path="movies" element={ <Movies /> } />
-                      <Route path="movie" element={ <Movie /> } />
+                      <Route path="/" element={ <Movies /> } />
+                      <Route path="movie" element={ <Title /> } />
                       <Route path="series" element={ <Series /> } />
+                      <Route path='titles/:genre' element={<GenrePage />} />
                     </Route>
                     <Route path="/rating-history" element={ <RatingHistory /> } />
                     <Route path="/signup" element={ <Signup /> } />

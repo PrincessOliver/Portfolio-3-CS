@@ -1,14 +1,6 @@
-import { NavBar } from "../components/NavBar";
 import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import noPoster from '../Information_Missing_Mock_MC_Patch.jpg'; 
-import {
-    BrowserRouter as Router,
-    Link,
-    Routes,
-    Route, 
-    Outlet
-} from "react-router-dom";
 
 export const Movies = () => {
     const [shownTitles, setShownTitles] = useState([]);
@@ -39,7 +31,6 @@ export const Movies = () => {
 
     return (
         <>
-            
             <div>
                 {page > 0 && <button onClick={() => { if (page > 0) { setPage(page -1) }}}>Prev</button>}
                 <button onClick={() => setPage(page + 1)}>Next</button>

@@ -1,11 +1,8 @@
-import { NavBar } from "../components/NavBar";
 import React, { useEffect, useState } from 'react';
 
 export const Series = () => {
     const [shownTitles, setShownTitles] = useState([]);
     const [page, setPage] = useState(0);
-
-    const loggedIn = localStorage.length > 0;
 
     useEffect(() => {
         getTitles('http://localhost:5001/api/titles/series');
@@ -32,7 +29,6 @@ export const Series = () => {
 
     return (
         <>
-            <NavBar loggedIn={loggedIn} />
             <div>
                 {page > 0 && <button onClick={() => { if (page > 0) { setPage(page -1) }}}>Prev</button>}
                 <button onClick={() => setPage(page + 1)}>Next</button>

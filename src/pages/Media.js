@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react"
-import { NavBar } from "../components/NavBar"
-import ReactStars from "react-rating-stars-component";
+// import { useEffect, useState } from "react"
+// import { NavBar } from "../components/NavBar"
+// import ReactStars from "react-rating-stars-component";
 import { Outlet } from "react-router-dom";
-import { Navbar } from "react-bootstrap";
 
 export const Media = () => {
 

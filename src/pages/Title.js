@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react"
-import { NavBar } from "../components/NavBar"
 import ReactStars from "react-rating-stars-component";
 
 export const Title = () => {
@@ -84,8 +83,7 @@ export const Title = () => {
     }
 
     return (
-        <>
-            
+        <> 
             {movie && <div className="movie">
                 <img src={movie.poster} alt='poster' />
                 <p>primaryTitle: {movie.primaryTitle}</p>

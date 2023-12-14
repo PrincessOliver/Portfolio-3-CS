@@ -1,18 +1,13 @@
-import { NavBar } from "../components/NavBar";
 import React, { useEffect, useState } from 'react';
 
 export const Bookmarks = () => {
     const [shownBookmarks, setShownBookmarks] = useState([]);
     const [userId, setUserId] = useState(null);
 
-    const loggedIn = localStorage.getItem('userId') !== null;
-
     useEffect(() => {
-        if (loggedIn) {
-            const storedUserId = localStorage.getItem('userId');
-            setUserId(storedUserId);
-        }
-    }, [loggedIn]);
+        const storedUserId = localStorage.getItem('userId');
+        setUserId(storedUserId);
+    }, []);
 
     useEffect(() => {
         if (userId) {
@@ -37,7 +32,6 @@ export const Bookmarks = () => {
 
     return (
         <>
-            <NavBar loggedIn={loggedIn} />
             <div>
                 <div className="container mt-4">
                     <h2>Bookmarks</h2>

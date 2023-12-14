@@ -2,17 +2,15 @@ import React, { useState, useEffect } from 'react';
 import logo from '../IMDBClone.png';
 // import ProfileIcon from '../ProfileIcon.png';
 import '../App.css';
-import {
-    BrowserRouter as Router,
-    Link,
-    Routes,
-    Route,
-    Outlet,
-} from "react-router-dom";
 
 export const NavBar = () => {
     const [ searchVal, setSearchVal ] = useState(null)
     const [ searchRes, setSearchRes ] = useState(null)
+    const [ loggedIn, setLoggedIn ] = useState(false)
+
+    useEffect(() => {
+        if (localStorage.getItem('token') !== null) setLoggedIn(true)
+    }, [])
 
     useEffect(() => {
         try {
@@ -111,20 +109,13 @@ export const NavBar = () => {
                             })}
                         </div>
                     </li>
-                    <li className="nav-item">
-                        <a className="nav-link Actors" href="/#">Actors</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link Bookmark" href="/bookmarks">Bookmarks</a>                    
-                    </li>
 
                     <li className="nav-item">
                         <a className="nav-link Game" href="/#"> Game</a>
-
                     </li>
 
                     <div className='nav-right'>
-                    {loggedIn ? <> <div className='username'> {userName} </div>
+                    {loggedIn ? <> <div className='username'> {localStorage.getItem('userName')} </div>
                             <button className='nav-item dropdown profile-btn'>
                                 <i className="bi bi-person-fill dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
                                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
