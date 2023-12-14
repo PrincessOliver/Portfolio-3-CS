@@ -159,6 +159,16 @@
     filter: brightness(0.9);
 }
 
+.page-btn {
+    background: none;
+    border: none;
+    outline: none;
+    padding: 5px 20px;
+    background-color: gray;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
 @media (max-width: 992px) {
     .nav-right {
         position: unset;
