@@ -82,7 +82,7 @@ export const NavBar = () => {
                     <div className='search-results'>
                         {!searchRes && <span className='loader center'></span>}
                         {searchRes && searchRes.length > 0 && searchRes.map((item, index) => {
-                            return <div key={index}>{item.searchString}</div>
+                            return <div onClick={() => console.log(item.searchString)} className='search-result' key={index}>{item.searchString}</div>
                         })}
                         {searchRes && searchRes.length === 0 && <div className='center'>no results</div>}
                     </div> 
@@ -103,7 +103,7 @@ export const NavBar = () => {
                         </a>
                         <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                             {genres.map(genre => {
-                                return <a key={genre} className="dropdown-item" href={genre}>{genre}</a>;
+                                return <a key={genre} className="dropdown-item" href={'/titles/' + genre.toLocaleLowerCase()}>{genre}</a>;
                             })}
                         </div>
                     </li>

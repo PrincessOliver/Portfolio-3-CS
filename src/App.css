@@ -149,6 +149,16 @@
     top: 63px;
 }
 
+.search-result {
+    padding: 10px;
+    cursor: pointer;
+    background-color: gray;
+}
+
+.search-result:hover {
+    filter: brightness(0.9);
+}
+
 @media (max-width: 992px) {
     .nav-right {
         position: unset;

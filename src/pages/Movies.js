@@ -31,29 +31,6 @@ export const Homepage = () => {
         }
     };
 
-    const addToBookmarks = async e => {
-        try {
-            e.stopPropagation()
-            const res = await fetch('http://localhost:5001/api/bookmarks', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    userId: localStorage.getItem('userId'),
-                    titleId: window.location.search.slice(1),
-                    userNote: 'x'
-                })
-            })
-            const json = await res.json()
-
-            console.log(json)
-        }
-        catch (err) {
-            console.log(err)
-        }
-    }
-
     return (
         <>
             <NavBar />
@@ -68,7 +45,7 @@ export const Homepage = () => {
                                 <div 
                                     onClick={() => {
                                         localStorage.setItem('clickedTitle', title.poster)
-                                        window.location = `movie?${title.url.split('/')[5]}`
+                                        window.location = `title?${title.url.split('/')[5]}`
                                     }}
                                     className="card"
                                 >
@@ -76,7 +53,6 @@ export const Homepage = () => {
                                     <div className="card-body">
                                         <h5 className="card-title">{title.name}</h5>
                                         <p className="card-text">{Math.round(title.weightAvgRating * 10) / 10}/10</p>
-                                        <button onClick={(e) => addToBookmarks(e)}>ADD TO BOOKMARKS</button>
                                     </div>
                                 </div>
                             </div>
