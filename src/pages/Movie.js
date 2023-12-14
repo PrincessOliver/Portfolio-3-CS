@@ -83,7 +83,7 @@ export const Movie = () => {
                 <p>writer: {movie.writer}</p>
                 <p>weightAvgRating: {movie.weightAvgRating}</p>
                 <ReactStars
-                    count={10}
+                    count={10} // could it perhaps be a float?
                     onChange={ratingChanged}
                     size={30}
                     activeColor="#ffd700"

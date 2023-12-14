@@ -68,7 +68,7 @@ console.log("x")
     return(
         <>        
       
-            <ToastContainer />
+          
             <Router>
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <a href="/">
