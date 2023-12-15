@@ -36,10 +36,11 @@ function App() {
                 <Routes>
                     <Route path="/" element ={<Media/>}>
                       <Route path="/" element={ <Movies /> } />
-                      <Route path="title" element={ <Title /> } />
+                      <Route path="title/:id" element={ <Title /> } />
                       <Route path="series" element={ <Series /> } />
                       <Route path='titles/:genre' element={<GenrePage />} />
                     </Route>
+                    <Route path="/person/:id" element={ <SearchHistory /> } />
                     <Route path="/search-history" element={ <SearchHistory /> } />
                     <Route path="/rating-history" element={ <RatingHistory /> } />
                     <Route path="/signup" element={ <Signup /> } />

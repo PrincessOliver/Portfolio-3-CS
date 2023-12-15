@@ -84,12 +84,22 @@ export const NavBar = () => {
                     <div className='search-results'>
                         {!searchRes && <span className='loader center'></span>}
                         {searchRes && searchRes.length > 0 && searchRes.map((item, index) => {
-                            return <div onClick={() => console.log(item.searchString)} className='search-result' key={index}>{item.searchString}</div>
+                            return <div
+                                onClick={() => {
+                                    if (item.id.slice(0, 2) === 'tt') window.location.pathname = `title/${item.id}`
+                                    else window.location = `person/${item.id}`
+                                }}
+                                className='search-result'
+                                key={index}
+                            >
+                                {item.searchString}
+                            </div>
                         })}
                         {searchRes && searchRes.length === 0 && <div className='center'>no results</div>}
                     </div> 
                 : null}
             </div>
+            
 
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav mr-auto">

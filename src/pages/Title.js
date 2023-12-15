@@ -1,17 +1,19 @@
 import { useEffect, useState } from "react"
 import ReactStars from "react-rating-stars-component";
 import { ToastContainer, toast } from 'react-toastify';
+import { useParams } from 'react-router-dom';
 
 export const Title = () => {
+    const { id } = useParams()
     const [ movie, setMovie ] = useState(null)
 
     useEffect(() => {
         (async () => {
             try {
-                const res = await fetch(`http://localhost:5001/api/titles/${window.location.search.slice(1)}`)
+                const res = await fetch(`http://localhost:5001/api/titles/${id}`)
                 const json = await res.json()
 
-                const res2 = await fetch(`http://localhost:5001/api/ratings/${localStorage.getItem('userId')}/${window.location.search.slice(1)}`)
+                const res2 = await fetch(`http://localhost:5001/api/ratings/${localStorage.getItem('userId')}/${id}`)
                 const json2 = await res2.json()
                 
                 setMovie({
@@ -50,7 +52,7 @@ export const Title = () => {
                 },
                 body: JSON.stringify({
                     userId: localStorage.getItem('userId'),
-                    titleId: window.location.search.slice(1),
+                    id,
                     rating: newRating
                 })
             })
@@ -71,7 +73,7 @@ export const Title = () => {
                 },
                 body: JSON.stringify({
                     userId: localStorage.getItem('userId'),
-                    titleId: window.location.search.slice(1),
+                    id
                 })
             })
             const json = await res.json()
@@ -93,7 +95,7 @@ export const Title = () => {
                 <p>primaryTitle: {movie.primaryTitle}</p>
                 <p>type: {movie.type}</p>
                 <p>startYear: {movie.startYear}</p>
-                {movie.endYear.trim().length !== 0 && <p>endYear: {movie.endYear}</p>}
+                <p>endYear: {movie.endYear}</p>
                 <p>omdbReleaseDate: {movie.omdbReleaseDate}</p>
                 <p>awards: {movie.awards}</p>
                 <p>rated: {movie.rated}</p>
