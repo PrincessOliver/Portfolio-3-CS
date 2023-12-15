@@ -26,6 +26,7 @@ import { Media } from './pages/Media';
 
 import GenrePage from './pages/GenrePage';
 import { NavBar } from './components/NavBar';
+import { SearchHistory } from './pages/SearchHistory';
 
 function App() {
     return(
@@ -39,6 +40,7 @@ function App() {
                       <Route path="series" element={ <Series /> } />
                       <Route path='titles/:genre' element={<GenrePage />} />
                     </Route>
+                    <Route path="/search-history" element={ <SearchHistory /> } />
                     <Route path="/rating-history" element={ <RatingHistory /> } />
                     <Route path="/signup" element={ <Signup /> } />
                     <Route path="/login" element={<Login />} />

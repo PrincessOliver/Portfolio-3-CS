@@ -123,7 +123,7 @@ export const NavBar = () => {
                                     <a className="dropdown-item dropdown dropdown-toggle" href="/#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">History</a>
                                     <div className="dropdown-menu dropdown-menu-history" aria-labelledby="navbarDropdown">
                                         <a className="dropdown-item" href="/rating-history">Rating</a>
-                                        <a className="dropdown-item" href="/#">Search</a>
+                                        <a className="dropdown-item" href="/search-history">Search</a>
                                     </div>
                                     <a onClick={() => localStorage.clear()} className="dropdown-item" href="/">Logout</a>
                                 </div>
