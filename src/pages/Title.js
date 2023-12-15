@@ -14,7 +14,7 @@ export const Title = () => {
                 const res2 = await fetch(`http://localhost:5001/api/ratings/${localStorage.getItem('userId')}/${window.location.search.slice(1)}`)
                 const json2 = await res2.json()
                 
-                setMovie({
+                setMovie({ 
                     primaryTitle: json.primaryTitle,
                     type: json.type,
                     startYear: json.startYear,
@@ -85,29 +85,31 @@ export const Title = () => {
         }
     }
 
-    return (
+    return ( 
         <> 
-            <ToastContainer />
-            {movie && <div className="movie">
-                <img src={movie.poster} alt='poster' />
-                <p>primaryTitle: {movie.primaryTitle}</p>
-                <p>type: {movie.type}</p>
-                <p>startYear: {movie.startYear}</p>
-                {movie.endYear.trim().length !== 0 && <p>endYear: {movie.endYear}</p>}
-                <p>omdbReleaseDate: {movie.omdbReleaseDate}</p>
-                <p>awards: {movie.awards}</p>
-                <p>rated: {movie.rated}</p>
-                <p>year: {movie.year}</p>
-                <p>runtime: {movie.runtime}</p>
-                <p>director: {movie.director}</p>
-                <p>totalSeasons: {movie.totalSeasons}</p>
-                <p>boxOffice: {movie.boxOffice}</p>
-                <p>country: {movie.country}</p>
-                <p>actors: {movie.actors}</p>
-                <p>writer: {movie.writer}</p>
-                <p>weightAvgRating: {movie.weightAvgRating}</p>
-                <ReactStars
-                    count={10} // could it perhaps be a float?
+            <ToastContainer /> 
+            {movie && <div className="movie"> 
+                <img src={movie.poster} alt='poster' /> 
+                {movie.titleId && (<p hidden>titleId: {movie.titleId}</p>)}
+                {movie.primaryTitle && (<p>primaryTitle: {movie.primaryTitle}</p>)}
+                {movie.type && movie.type !== 'N/A' && movie.type.length !== 0 && <p>type: {movie.type} </p>}
+                {movie.startYear && movie.startYear !== 'N/A' && movie.startYear.length !== 0 && <p>startYear: {movie.startYear} </p>}
+                {movie.endYear && movie.endYear !== 'N/A' && movie.endYear.length !== 0 && <p>endYear: {movie.endYear} </p>}
+                {movie.omdbReleaseDate && movie.omdbReleaseDate !== 'N/A' && movie.omdbReleaseDate.length !== 0 && <p>omdbReleaseDate: {movie.omdbReleaseDate} </p>}
+                {movie.awards && movie.awards !== 'N/A' && movie.awards.length !== 0 && <p>awards: {movie.awards} </p>}
+                {movie.rated && movie.rated !== 'N/A' && movie.rated.length !== 0 && <p>rated: {movie.rated} </p>}
+                {movie.year && movie.year !== 'N/A' && movie.year.length !== 0 && <p>year: {movie.year} </p>}
+                {(movie.runtime && movie.runtime !== 'N/A' && movie.runtime.length !== 0 && <p>runtime: {movie.runtime} </p>)}
+                {movie.director && movie.director !== 'N/A' && movie.director.length !== 0 && <p>director: {movie.director} </p>}
+                {(movie.totalSeasons && movie.totalSeasons !== 'N/A') && movie.totalSeasons.length !== 0 && <p>totalSeasons: {movie.totalSeasons} </p>}
+                {(movie.boxOffice && movie.boxOffice !== 'N/A' && movie.boxOffice.length !== 0 && (<p>boxOffice: {movie.boxOffice} </p>))}
+                {movie.country && movie.country !== 'N/A' && movie.country.length !== 0 && <p>country: {movie.country} </p>}
+                {movie.actors && movie.actors !== 'N/A' && movie.actors.length !== 0 && <p>actors: {movie.actors} </p>}
+                {movie.writer && movie.writer !== 'N/A' && movie.writer.length !== 0 && <p>writer: {movie.writer} </p>}
+                {movie.weightAvgRating && movie.weightAvgRating !== 'N/A' && movie.weightAvgRating.length !== 0 && <p>weightAvgRating: {movie.weightAvgRating} </p>}
+              
+  <ReactStars 
+                    count={10}
                     onChange={ratingChanged}
                     size={30}
                     activeColor="#ffd700"
