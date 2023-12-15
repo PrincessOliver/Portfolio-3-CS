@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import noPoster from '../Information_Missing_Mock_MC_Patch.jpg';
 import { ToastContainer, toast } from 'react-toastify';
-import { ConfirmModal } from '../components/ConfirmModal';
+import { ConfirmDeleteModal } from '../components/ConfirmDeleteModal';
 
 export const Bookmarks = () => {
     const [shownBookmarks, setShownBookmarks] = useState([]);
@@ -76,12 +76,12 @@ export const Bookmarks = () => {
 
     return (
         <>
-            <ConfirmModal
+            <ConfirmDeleteModal
                 shown={modalShown}
                 setShown={setModalShown}
-                removeBookmark={removeBookmark} 
-                removeBookmarks={removeBookmarks}
-                bookmarkId={bookmarkId}
+                removeItem={removeBookmark} 
+                removeAllItems={removeBookmarks}
+                id={bookmarkId}
                 request={request}
             />
             <ToastContainer />

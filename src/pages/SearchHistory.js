@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
-import { ConfirmModal } from '../components/ConfirmModal';
+import { ConfirmDeleteModal } from '../components/ConfirmDeleteModal';
 
 export const SearchHistory = () => {
     const [shownSearchHistory, setShownSearchHistory] = useState([]);
@@ -35,7 +35,7 @@ export const SearchHistory = () => {
         }
     };
 
-    const removeSearchHistory = async () => {
+    const removeSearchHistory = async history => {
         try {
             const res = await fetch(`http://localhost:5001/api/search-history/delete/${userId}/${historyIdToDelete}`, {
                 method: 'DELETE',
@@ -48,7 +48,6 @@ export const SearchHistory = () => {
             if (json) {
                 toast.success('Search history removed');
                 getSearchHistory(`http://localhost:5001/api/search-history/${userId}`);
-                setModalShown(false);
             }
         } catch (err) {
             console.error('Error removing search history', err);
@@ -68,7 +67,6 @@ export const SearchHistory = () => {
             if (json) {
                 toast.success('All search history removed');
                 getSearchHistory(`http://localhost:5001/api/search-history/${userId}`);
-                setModalShown(false); 
             }
         } catch (err) {
             console.error('Error removing all search history', err);
@@ -77,11 +75,12 @@ export const SearchHistory = () => {
 
     return (
         <>
-            <ConfirmModal
+            <ConfirmDeleteModal
                 shown={modalShown}
                 setShown={setModalShown}
                 removeItem={removeSearchHistory}
                 removeAllItems={removeAllSearchHistory}
+                id={historyIdToDelete}
                 request={request}
             />
             <ToastContainer />
@@ -106,7 +105,7 @@ export const SearchHistory = () => {
                                         <button
                                             onClick={() => {
                                                 setModalShown(true);
-                                                setHistoryIdToDelete(history.historyId);
+                                                setHistoryIdToDelete(history.id);
                                                 setRequest('one');
                                             }}
                                         >

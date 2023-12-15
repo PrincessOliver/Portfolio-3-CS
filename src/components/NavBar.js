@@ -120,15 +120,12 @@ export const NavBar = () => {
                                 <i className="bi bi-person-fill dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
                                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a className="dropdown-item" href="/bookmarks">Bookmarks</a>
-                                    <a className="dropdown-item dropdown dropdown-toggle" href="/#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">History</a>
-                                    <div className="dropdown-menu dropdown-menu-history" aria-labelledby="navbarDropdown">
-                                        <a className="dropdown-item" href="/rating-history">Rating</a>
-                                        <a className="dropdown-item" href="/search-history">Search</a>
-                                    </div>
+                                    <a className="dropdown-item" href="/rating-history">Rating History</a>
+                                    <a className="dropdown-item" href="/search-history">Search History</a>
                                     <a onClick={() => localStorage.clear()} className="dropdown-item" href="/">Logout</a>
                                 </div>
                             </button>
-                            </>
+                        </>
                     :
                     <div className='login-signup-btns'>
                         <a className="nav-link Login" href="/login">Login</a>

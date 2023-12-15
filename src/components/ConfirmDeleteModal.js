@@ -1,4 +1,4 @@
-export const ConfirmModal = ({ shown, setShown, removeBookmark, removeBookmarks, bookmarkId, request }) => {
+export const ConfirmDeleteModal = ({ shown, setShown, removeItem, removeAllItems, id, request }) => {
     return (
         <div onClick={() => setShown(false)} className="background" style={{ display: shown ? 'block' : 'none' }}>
             <div onClick={(e) => e.stopPropagation()} className="confirm-modal center">
@@ -10,9 +10,9 @@ export const ConfirmModal = ({ shown, setShown, removeBookmark, removeBookmarks,
                         <button
                             onClick={() => {
                                 if (request === 'all') {
-                                    removeBookmarks()
+                                    removeAllItems()
                                 } else if (request === 'one') {
-                                    removeBookmark(bookmarkId)
+                                    removeItem(id)
                                 }
                                 setShown(false)
                             }}
