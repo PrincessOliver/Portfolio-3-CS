@@ -51,7 +51,7 @@ const Login = () => {
                 localStorage.setItem('userId', json.id);
                 localStorage.setItem('userName', json.userName);
                 localStorage.setItem('token', json.token);
-                window.location.pathname = '/'
+                navigate('/')
                 toast.success('Login Successfully');
             } else {
                 const errorMessage = json.message || 'Invalid username or password';

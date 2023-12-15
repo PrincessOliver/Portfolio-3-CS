@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import logo from '../IMDBClone.png';
 // import ProfileIcon from '../ProfileIcon.png';
 import '../App.css';
+import { useNavigate } from 'react-router-dom';
 
 export const NavBar = () => {
+    const navigate = useNavigate()
     const [ searchVal, setSearchVal ] = useState(null)
     const [ searchRes, setSearchRes ] = useState(null)
     const [ loggedIn, setLoggedIn ] = useState(false)
@@ -86,8 +88,8 @@ export const NavBar = () => {
                         {searchRes && searchRes.length > 0 && searchRes.map((item, index) => {
                             return <div
                                 onClick={() => {
-                                    if (item.id.slice(0, 2) === 'tt') window.location.pathname = `title/${item.id}`
-                                    else window.location = `person/${item.id}`
+                                    if (item.id.slice(0, 2) === 'tt') navigate(`title/${item.id}`)
+                                    else navigate(`person/${item.id}`)
                                 }}
                                 className='search-result'
                                 key={index}

@@ -50,7 +50,7 @@ export const Series = () => {
                     {shownTitles.items?.map((title, index) => (
                         <div className="col-md-4 mb-4" key={index}>
                             <div 
-                                onClick={() => navigate(`title/${title.id}`, { replace: true })}
+                                onClick={() => navigate(`/title/${title.id}`, { replace: true })}
                                 className="card"
                             >
                                 <img className="card-img-top" src={title.poster} alt="poster" />

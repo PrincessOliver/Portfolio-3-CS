@@ -23,16 +23,16 @@ import { Movies } from './pages/Movies';
 import { Title } from './pages/Title';
 import { RatingHistory } from './pages/RatingHistory';
 import { Media } from './pages/Media';
-
 import GenrePage from './pages/GenrePage';
 import { NavBar } from './components/NavBar';
 import { SearchHistory } from './pages/SearchHistory';
+import { Person } from './pages/Person';
 
 function App() {
     return(
         <>        
-            <NavBar />
             <Router>
+                <NavBar />
                 <Routes>
                     <Route path="/" element ={<Media/>}>
                       <Route path="/" element={ <Movies /> } />
@@ -40,7 +40,7 @@ function App() {
                       <Route path="series" element={ <Series /> } />
                       <Route path='titles/:genre' element={<GenrePage />} />
                     </Route>
-                    <Route path="/person/:id" element={ <SearchHistory /> } />
+                    <Route path="/person/:id" element={ <Person /> } />
                     <Route path="/search-history" element={ <SearchHistory /> } />
                     <Route path="/rating-history" element={ <RatingHistory /> } />
                     <Route path="/signup" element={ <Signup /> } />
