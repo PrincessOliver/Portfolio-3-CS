@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import noPoster from '../Information_Missing_Mock_MC_Patch.jpg'; 
 import ReactPaginate from 'react-paginate';
+import { useNavigate } from 'react-router-dom';
 
 export const Movies = () => {
+    const navigate = useNavigate()
     const [shownTitles, setShownTitles] = useState([]);
     const [page, setPage] = useState(0);
 
@@ -50,9 +52,7 @@ export const Movies = () => {
                     {shownTitles.items?.map((title, index) => (
                         <div className="col-md-4 mb-4" key={index}>
                             <div 
-                                onClick={() => {
-                                    window.location = `title?${title.url.split('/')[5]}`
-                                }}
+                                onClick={() => {navigate(`title/${title.id}`)}}
                                 className="card"
                             >
                                 <img className="card-img-top" src={title.poster !=='N/A' ? title.poster : noPoster} alt="poster" />

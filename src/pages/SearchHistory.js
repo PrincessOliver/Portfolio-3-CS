@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import noPoster from '../Information_Missing_Mock_MC_Patch.jpg';
 import { ToastContainer, toast } from 'react-toastify';
 import { ConfirmDeleteModal } from '../components/ConfirmDeleteModal';
 
-export const Bookmarks = () => {
-    const [shownBookmarks, setShownBookmarks] = useState([]);
+export const SearchHistory = () => {
+    const [shownSearchHistory, setShownSearchHistory] = useState([]);
     const [userId, setUserId] = useState(null);
-    const [ modalShown, setModalShown ] = useState(false)
-    const [ bookmarkId, setBookmarkId ] = useState(null)
-    const [ request, setRequest ] = useState(null)
+    const [modalShown, setModalShown] = useState(false);
+    const [historyIdToDelete, setHistoryIdToDelete] = useState(null);
+    const [request, setRequest] = useState(null);
 
     useEffect(() => {
         const storedUserId = localStorage.getItem('userId');
@@ -17,98 +16,97 @@ export const Bookmarks = () => {
 
     useEffect(() => {
         if (userId) {
-            getBookmarks(`http://localhost:5001/api/bookmarks/${userId}`);
+            getSearchHistory(`http://localhost:5001/api/search-history/${userId}`);
         }
     }, [userId]);
 
-    const getBookmarks = async (endpoint) => {
+    const getSearchHistory = async (endpoint) => {
         try {
             const res = await fetch(endpoint);
             const json = await res.json();
 
             if (json && Array.isArray(json)) {
-                setShownBookmarks(json);
+                setShownSearchHistory(json);
             } else {
                 console.error('API did not return an array of items', json);
             }
         } catch (error) {
-            console.error('Error fetching bookmarks', error);
+            console.error('Error fetching search history', error);
         }
     };
 
-    const removeBookmark = async bookmarkId => {
+    const removeSearchHistory = async history => {
         try {
-            const res = await fetch(`http://localhost:5001/api/bookmarks/${userId}/${bookmarkId}`, {
+            const res = await fetch(`http://localhost:5001/api/search-history/delete/${userId}/${historyIdToDelete}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json'
                 }
-            })
-            const json = await res.json()
-            if (json) {
-                toast.success('Bookmark removed')
-                getBookmarks(`http://localhost:5001/api/bookmarks/${userId}`);
-            }
-        }
-        catch (err) {
-            console.log(err)
-        }
-    }
+            });
+            const json = await res.json();
 
-    const removeBookmarks = async () => {
+            if (json) {
+                toast.success('Search history removed');
+                getSearchHistory(`http://localhost:5001/api/search-history/${userId}`);
+            }
+        } catch (err) {
+            console.error('Error removing search history', err);
+        }
+    };
+
+    const removeAllSearchHistory = async () => {
         try {
-            const res = await fetch(`http://localhost:5001/api/bookmarks/${userId}`, {
+            const res = await fetch(`http://localhost:5001/api/search-history/delete/${userId}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json'
                 }
-            })
-            const json = await res.json()
+            });
+            const json = await res.json();
+
             if (json) {
-                toast.success('All bookmarks removed')
-                getBookmarks(`http://localhost:5001/api/bookmarks/${userId}`);
+                toast.success('All search history removed');
+                getSearchHistory(`http://localhost:5001/api/search-history/${userId}`);
             }
+        } catch (err) {
+            console.error('Error removing all search history', err);
         }
-        catch (err) {
-            console.log(err)
-        }
-    }
+    };
 
     return (
         <>
             <ConfirmDeleteModal
                 shown={modalShown}
                 setShown={setModalShown}
-                removeItem={removeBookmark} 
-                removeAllItems={removeBookmarks}
-                id={bookmarkId}
+                removeItem={removeSearchHistory}
+                removeAllItems={removeAllSearchHistory}
+                id={historyIdToDelete}
                 request={request}
             />
             <ToastContainer />
             <div>
                 <div className="container mt-4">
-                    <h2>Bookmarks</h2>
+                    <h2>Search History</h2>
                     <button
                         onClick={() => {
-                            setModalShown(true)
-                            setRequest('all')
+                            setModalShown(true);
+                            setRequest('all');
                         }}
                     >
                         Remove all
                     </button>
                     <div className="row">
-                        {shownBookmarks.map((bookmark, index) => (
+                        {shownSearchHistory.map((history, index) => (
                             <div className="col-md-4 mb-4" key={index}>
                                 <div className="card">
                                     <div className="card-body">
-                                    <img className="card-img-top" src={bookmark.omdbPoster !=='N/A' ? bookmark.omdbPoster : noPoster} alt="poster" />
-                                        <h5 className="card-bookmark">{bookmark.primaryTitle}</h5>
-                                        <h5 className="card-bookmark">User Note :{bookmark.userNote}</h5>
-                                        <button 
+                                        <p>Search Query: {history.searchQuery}</p>
+                                        <p>Timestamp: {history.timeStamp}</p>
+                                        <button
                                             onClick={() => {
-                                                setModalShown(true)
-                                                setBookmarkId(bookmark.bookmarkId)
-                                                setRequest('one')
+                                                setModalShown(true);
+                                                setHistoryIdToDelete(history.id);
+                                                setRequest('one');
                                             }}
                                         >
                                             Remove
@@ -122,4 +120,4 @@ export const Bookmarks = () => {
             </div>
         </>
     );
-}
+};

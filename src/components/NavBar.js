@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import logo from '../IMDBClone.png';
 // import ProfileIcon from '../ProfileIcon.png';
 import '../App.css';
+import { useNavigate } from 'react-router-dom';
 
 export const NavBar = () => {
+    const navigate = useNavigate()
     const [ searchVal, setSearchVal ] = useState(null)
     const [ searchRes, setSearchRes ] = useState(null)
     const [ loggedIn, setLoggedIn ] = useState(false)
@@ -84,12 +86,22 @@ export const NavBar = () => {
                     <div className='search-results'>
                         {!searchRes && <span className='loader center'></span>}
                         {searchRes && searchRes.length > 0 && searchRes.map((item, index) => {
-                            return <div onClick={() => console.log(item.searchString)} className='search-result' key={index}>{item.searchString}</div>
+                            return <div
+                                onClick={() => {
+                                    if (item.id.slice(0, 2) === 'tt') navigate(`title/${item.id}`)
+                                    else navigate(`person/${item.id}`)
+                                }}
+                                className='search-result'
+                                key={index}
+                            >
+                                {item.searchString}
+                            </div>
                         })}
                         {searchRes && searchRes.length === 0 && <div className='center'>no results</div>}
                     </div> 
                 : null}
             </div>
+            
 
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav mr-auto">
@@ -120,15 +132,12 @@ export const NavBar = () => {
                                 <i className="bi bi-person-fill dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
                                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a className="dropdown-item" href="/bookmarks">Bookmarks</a>
-                                    <a className="dropdown-item dropdown dropdown-toggle" href="/#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">History</a>
-                                    <div className="dropdown-menu dropdown-menu-history" aria-labelledby="navbarDropdown">
-                                        <a className="dropdown-item" href="/rating-history">Rating</a>
-                                        <a className="dropdown-item" href="/#">Search</a>
-                                    </div>
+                                    <a className="dropdown-item" href="/rating-history">Rating History</a>
+                                    <a className="dropdown-item" href="/search-history">Search History</a>
                                     <a onClick={() => localStorage.clear()} className="dropdown-item" href="/">Logout</a>
                                 </div>
                             </button>
-                            </>
+                        </>
                     :
                     <div className='login-signup-btns'>
                         <a className="nav-link Login" href="/login">Login</a>

@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
+import { useNavigate } from 'react-router-dom';
 
 export const Series = () => {
+    const navigate = useNavigate()
     const [shownTitles, setShownTitles] = useState([]);
     const [page, setPage] = useState(0);
 
@@ -10,7 +12,7 @@ export const Series = () => {
     }, []);
 
     useEffect(() => {
-        if (page > 0) getTitles(`http://localhost:5001/api/titles/series?page=${page -1}&pageSize=10`)
+        if (page > 0) getTitles(`http://localhost:5001/api/titles/series?page=${page - 1}&pageSize=10`)
     }, [page])
 
     const getTitles = async (endpoint) => {
@@ -48,9 +50,7 @@ export const Series = () => {
                     {shownTitles.items?.map((title, index) => (
                         <div className="col-md-4 mb-4" key={index}>
                             <div 
-                                onClick={() => {
-                                    window.location = `title?${title.url.split('/')[5]}`
-                                }}
+                                onClick={() => navigate(`/title/${title.id}`, { replace: true })}
                                 className="card"
                             >
                                 <img className="card-img-top" src={title.poster} alt="poster" />
