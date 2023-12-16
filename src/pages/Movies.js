@@ -8,6 +8,7 @@ export const Movies = () => {
     const navigate = useNavigate()
     const [shownTitles, setShownTitles] = useState([]);
     const [page, setPage] = useState(0);
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         getTitles('http://localhost:5001/api/titles/movies');
@@ -18,11 +19,13 @@ export const Movies = () => {
     }, [page])
 
     const getTitles = async (endpoint) => {
+        setIsLoading(true);
         try {
             const res = await fetch(endpoint);
             const json = await res.json();
 
             if (json && Array.isArray(json.items)) {
+                setIsLoading(false);
                 setShownTitles(json);
             } else {
                 console.error('API did not return an array of items:', json);
@@ -49,6 +52,7 @@ export const Movies = () => {
             <div className="container mt-4">
                 <h2>Movie Titles</h2>
                 <div className="row">
+                {isLoading && <p>Loading...</p>}
                     {shownTitles.items?.map((title, index) => (
                         <div className="col-md-4 mb-4" key={index}>
                             <div 
