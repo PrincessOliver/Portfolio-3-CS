@@ -102,11 +102,11 @@ export const Bookmarks = () => {
                                 <div className="card">
                                     <div className="card-body">
                                     <img className="card-img-top" src={bookmark.omdbPoster !=='N/A' ? bookmark.omdbPoster : noPoster} alt="poster" />
-                                        <h5 className="card-bookmark"> Name :{bookmark.primaryTitle}</h5>
-                                        <h5 className="card-bookmark">User Id :{bookmark.userId}</h5>
-                                        <h5 className="card-bookmark">Bookmark Id :{bookmark.bookmarkId}</h5>
-                                        <h5 className="card-bookmark">Title Id :{bookmark.titleId}</h5>
-                                        <h5 className="card-bookmark">User Note :{bookmark.userNote}</h5>
+                                        <h5 className="card-bookmark"> {bookmark.primaryTitle}</h5>
+                                        <h5 className="card-bookmark">{/*bookmark.userId*/}</h5>
+                                        <h5 className="card-bookmark">{/*bookmark.bookmarkId*/}</h5>
+                                        <h5 className="card-bookmark">{/*bookmark.titleId*/}</h5>
+                                        <h5 className="card-bookmark">{/*bookmark.userNote*/}</h5>
                                         <button 
                                             onClick={() => {
                                                 setModalShown(true)
