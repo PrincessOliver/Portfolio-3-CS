@@ -1,5 +1,7 @@
+import { Link } from "react-router-dom"
+
 export const Genre = ({ genre }) => {
     return (
-        <a className="dropdown-item" href={'/titles/' + genre}>{genre}</a>
+        <Link className="dropdown-item" to={'/titles/' + genre}>{genre}</Link>
     )
 }

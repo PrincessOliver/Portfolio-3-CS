@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
 import { ConfirmDeleteModal } from '../components/ConfirmDeleteModal';
 
 export const SearchHistory = () => {
     const [shownSearchHistory, setShownSearchHistory] = useState([]);
     const [userId, setUserId] = useState(null);
-    const [modalShown, setModalShown] = useState(false);
-    const [historyIdToDelete, setHistoryIdToDelete] = useState(null);
-    const [request, setRequest] = useState(null);
+    const [ modalShown, setModalShown ] = useState(false)
+    const [ endpoint, setEndpoint ] = useState(null)
+    const [ message, setMessage ] = useState(null)
 
     useEffect(() => {
         const storedUserId = localStorage.getItem('userId');
@@ -35,62 +34,23 @@ export const SearchHistory = () => {
         }
     };
 
-    const removeSearchHistory = async history => {
-        try {
-            const res = await fetch(`http://localhost:5001/api/search-history/delete/${userId}/${historyIdToDelete}`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-            const json = await res.json();
-
-            if (json) {
-                toast.success('Search history removed');
-                getSearchHistory(`http://localhost:5001/api/search-history/${userId}`);
-            }
-        } catch (err) {
-            console.error('Error removing search history', err);
-        }
-    };
-
-    const removeAllSearchHistory = async () => {
-        try {
-            const res = await fetch(`http://localhost:5001/api/search-history/delete/${userId}`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-            const json = await res.json();
-
-            if (json) {
-                toast.success('All search history removed');
-                getSearchHistory(`http://localhost:5001/api/search-history/${userId}`);
-            }
-        } catch (err) {
-            console.error('Error removing all search history', err);
-        }
-    };
-
     return (
         <>
             <ConfirmDeleteModal
                 shown={modalShown}
                 setShown={setModalShown}
-                removeItem={removeSearchHistory}
-                removeAllItems={removeAllSearchHistory}
-                id={historyIdToDelete}
-                request={request}
+                endpoint={endpoint}
+                message={message}
+                getData={() => getSearchHistory(`http://localhost:5001/api/search-history/${userId}`)}
             />
-            <ToastContainer />
             <div>
                 <div className="container mt-4">
                     <h2>Search History</h2>
                     <button
                         onClick={() => {
-                            setModalShown(true);
-                            setRequest('all');
+                            setModalShown(true)
+                            setEndpoint(`http://localhost:5001/api/search-history/delete/${userId}`)
+                            setMessage('All search history removed')
                         }}
                     >
                         Remove all
@@ -104,9 +64,9 @@ export const SearchHistory = () => {
                                         <p>Timestamp: {history.timeStamp}</p>
                                         <button
                                             onClick={() => {
-                                                setModalShown(true);
-                                                setHistoryIdToDelete(history.id);
-                                                setRequest('one');
+                                                setModalShown(true)
+                                                setEndpoint(`http://localhost:5001/api/search-history/delete/${userId}/${history.id}`)
+                                                setMessage('Search history removed')
                                             }}
                                         >
                                             Remove

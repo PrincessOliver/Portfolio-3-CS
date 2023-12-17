@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import logo from '../IMDBClone.png';
 // import ProfileIcon from '../ProfileIcon.png';
 import '../App.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { Genres } from './Genres';
 
 export const NavBar = () => {
@@ -10,10 +10,18 @@ export const NavBar = () => {
     const [ searchVal, setSearchVal ] = useState(null)
     const [ searchRes, setSearchRes ] = useState(null)
     const [ loggedIn, setLoggedIn ] = useState(false)
+    const [ searchShown, setSearchShown ] = useState(false)
+    const location = useLocation()
+    const [ firstRender, setFirstRender ] = useState(true)
 
     useEffect(() => {
-        if (localStorage.getItem('token') !== null) setLoggedIn(true)
-    }, [])
+        if (firstRender) {
+            if (localStorage.getItem('token') !== null) {
+                setLoggedIn(true)
+                setFirstRender(false)
+            }
+        }
+    }, [location])
 
     useEffect(() => {
         try {
@@ -21,13 +29,14 @@ export const NavBar = () => {
                 : `http://localhost:5001/api/titles/search/${searchVal}`
             let delay
             if (searchVal) {
+                setSearchShown(true)
                 delay = setTimeout(async () => {
                     let res = await fetch(endpoint)
                     let json = await res.json()
                     setSearchRes(json)
                 }, 1000)
             }
-          
+            
             return () => {
                 clearTimeout(delay)
                 setSearchRes(null)
@@ -40,19 +49,19 @@ export const NavBar = () => {
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <a href="/">
+            <Link to="/">
             <img src={logo} className="img1" alt="logo" />
-            </a>
+            </Link>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
             </button>
 
             <div>
                 <form className="form-inline my-2 my-lg-0">
-                    <input onChange={(e) => setSearchVal(e.target.value)}className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"></input>
+                    <input onFocus={() => setSearchShown(true)} onChange={(e) => setSearchVal(e.target.value)}className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"></input>
                     <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </form>
-                {searchVal ?
+                {searchVal && searchShown ? 
                     <div className='search-results'>
                         {!searchRes && <span className='loader center'></span>}
                         {searchRes && searchRes.length > 0 && searchRes.map((item, index) => {
@@ -60,6 +69,7 @@ export const NavBar = () => {
                                 onClick={() => {
                                     if (item.id.slice(0, 2) === 'tt') navigate(`title/${item.id}`)
                                     else navigate(`person/${item.id}`)
+                                    setSearchShown(false)
                                 }}
                                 className='search-result'
                                 key={index}
@@ -76,32 +86,40 @@ export const NavBar = () => {
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav mr-auto">
                     <li className="nav-item">
-                    <a className="nav-link" href="/">Movies <span className="sr-only"></span></a>
+                    <Link className="nav-link" to="/">Movies <span className="sr-only"></span></Link>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="/series"> Series</a>
+                        <Link className="nav-link" to="/series"> Series</Link>
                     </li>
                     <Genres />
-                    <li className="nav-item">
+                    {/* <li className="nav-item">
                         <a className="nav-link Game" href="/#"> Game</a>
-                    </li>
+                    </li> */}
 
                     <div className='nav-right'>
                     {loggedIn ? <> <div className='username'> {localStorage.getItem('userName')} </div>
                             <button className='nav-item dropdown profile-btn'>
                                 <i className="bi bi-person-fill dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
                                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a className="dropdown-item" href="/bookmarks">Bookmarks</a>
-                                    <a className="dropdown-item" href="/rating-history">Rating History</a>
-                                    <a className="dropdown-item" href="/search-history">Search History</a>
-                                    <a onClick={() => localStorage.clear()} className="dropdown-item" href="/">Logout</a>
+                                    <Link className="dropdown-item" to="/bookmarks">Bookmarks</Link>
+                                    <Link className="dropdown-item" to="/rating-history">Rating History</Link>
+                                    <Link className="dropdown-item" to="/search-history">Search History</Link>
+                                    <Link
+                                        onClick={() => {
+                                            localStorage.clear()
+                                            setLoggedIn(false)
+                                        }}
+                                        className="dropdown-item" to="/"
+                                    >
+                                        Logout
+                                    </Link>
                                 </div>
                             </button>
                         </>
                     :
                     <div className='login-signup-btns'>
-                        <a className="nav-link Login" href="/login">Login</a>
-                        <a className="nav-link SignUp" href="/signup">SignUp</a>
+                        <Link className="nav-link Login" to="/login">Login</Link>
+                        <Link className="nav-link SignUp" to="/signup">SignUp</Link>
                     </div>
                     }  
                     </div>

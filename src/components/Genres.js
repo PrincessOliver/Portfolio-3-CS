@@ -1,14 +1,15 @@
 import { GetGenres } from "../hooks/GetGenres"
 import { Genre } from "./Genre"
+import { Link } from "react-router-dom"
 
 export const Genres = () => {
     const genres = GetGenres()
 
     return (
         <li className="nav-item dropdown dropdown-genres">
-            <a className="nav-link dropdown-toggle" href="/#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <Link className="nav-link dropdown-toggle" to="/#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Genres
-            </a>
+            </Link>
             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                 {genres && genres.map((genre, index) => {
                     return <Genre key={index} genre={genre.titleGenre} />

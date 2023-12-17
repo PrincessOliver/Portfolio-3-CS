@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react"
 import ReactStars from "react-rating-stars-component";
-import { ToastContainer, toast } from 'react-toastify';
-import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { useParams, useLocation } from 'react-router-dom';
 
 export const Title = () => {
     const { id } = useParams()
     const [ movie, setMovie ] = useState(null)
+    const [ bookmarked, setBookmarked ] = useState(false)
+    const location = useLocation()
 
     useEffect(() => {
         (async () => {
@@ -13,10 +15,22 @@ export const Title = () => {
                 const res = await fetch(`http://localhost:5001/api/titles/${id}`)
                 const json = await res.json()
 
-                const res2 = await fetch(`http://localhost:5001/api/ratings/${localStorage.getItem('userId')}/${id}`)
-                const json2 = await res2.json()
+                let json2 = null
+
+                if (localStorage.getItem('token')) {
+                    const res2 = await fetch(`http://localhost:5001/api/ratings/${localStorage.getItem('userId')}/${id}`)
+                    json2 = await res2.json()
+
+                    const res3 = await fetch(`http://localhost:5001/api/bookmarks/by-title-id/${localStorage.getItem('userId')}/${id}`)
+                    const json3 = await res3.json()
+                    
+                    if (json3.userId) {
+                        setBookmarked(true)
+                    }
+                }
                 
-                setMovie({ 
+                setMovie({
+                    id: json.id,
                     primaryTitle: json.primaryTitle,
                     type: json.type,
                     startYear: json.startYear,
@@ -34,53 +48,59 @@ export const Title = () => {
                     actors: json.actors,
                     writer: json.writer,
                     weightAvgRating: json.weightAvgRating,
-                    rating: json2.rating
+                    rating: json2 && json2.rating
                 })
             }
             catch (err) {
                 console.log(err)
             }
         })()
-    }, [])
+    }, [location])
 
-    const ratingChanged = async (newRating) => {
+    const rateTitle = async newRating => {
         try {
             const res = await fetch('http://localhost:5001/api/ratings', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
                 },
                 body: JSON.stringify({
                     userId: localStorage.getItem('userId'),
-                    id,
+                    titleId: movie.id,
                     rating: newRating
                 })
             })
-             const json = await res.json()
-             console.log(json);
+            const json = await res.json()
+            console.log(json)
+            toast.success(`Title rated with ${newRating}`)
         }
         catch (err) {
             console.log(err)
         }
     };
 
-    const addToBookmarks = async e => {
+    const addToBookmarks = async () => {
         try {
-            e.stopPropagation()
-            const res = await fetch('http://localhost:5001/api/bookmarks', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    userId: localStorage.getItem('userId'),
-                    id
+            if (localStorage.getItem('token')) {
+                const res = await fetch('http://localhost:5001/api/bookmarks', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        userId: localStorage.getItem('userId'),
+                        titleId: movie.id
+                    })
                 })
-            })
-            const json = await res.json()
-            
-            if (json) {
-                toast.success('Added to bookmarks');
+                const json = await res.json()
+                
+                if (json) {
+                    toast.success('Added to bookmarks');
+                    setBookmarked(true)
+                }
+            } else {
+                toast.error('You have to be logged in')
             }
         }
         catch (err) {
@@ -90,7 +110,6 @@ export const Title = () => {
 
     return ( 
         <> 
-            <ToastContainer /> 
             {movie && <div className="movie"> 
                 <img src={movie.poster} alt='poster' /> 
                 {movie.titleId && (<p hidden>titleId: {movie.titleId}</p>)}
@@ -111,14 +130,22 @@ export const Title = () => {
                 {movie.writer && movie.writer !== 'N/A' && movie.writer.length !== 0 && <p>writer: {movie.writer} </p>}
                 {movie.weightAvgRating && movie.weightAvgRating !== 'N/A' && movie.weightAvgRating.length !== 0 && <p>weightAvgRating: {movie.weightAvgRating} </p>}
               
-  <ReactStars 
+                <ReactStars 
                     count={10}
-                    onChange={ratingChanged}
+                    onChange={rateTitle}
                     size={30}
                     activeColor="#ffd700"
                     value={movie.rating}
+                    edit={localStorage.getItem('token') !== null}
                 />
-                <button onClick={(e) => addToBookmarks(e)}>ADD TO BOOKMARKS</button>
+                <button 
+                    disabled={bookmarked}
+                    onClick={() => {
+                        addToBookmarks()
+                    }}
+                >
+                    {bookmarked ? 'BOOKMARKED' : 'ADD TO BOOKMARKS'}
+                </button>
             </div>
             }
         </>

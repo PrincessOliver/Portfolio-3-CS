@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useEffect, useState } from "react";
 
@@ -51,8 +51,8 @@ const Login = () => {
                 localStorage.setItem('userId', json.id);
                 localStorage.setItem('userName', json.userName);
                 localStorage.setItem('token', json.token);
-                navigate('/')
                 toast.success('Login Successfully');
+                navigate('/')
             } else {
                 const errorMessage = json.message || 'Invalid username or password';
                 toast.error(errorMessage);
@@ -67,7 +67,6 @@ const Login = () => {
 
     return (
         <>
-            <ToastContainer />
             <form className="signup-login-form container-fluid">
                 <div className="form-group">
                     <label>Username</label>

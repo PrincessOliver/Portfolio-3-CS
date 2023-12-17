@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
 
 const GenrePage = () => {
   const { genre } = useParams();
   const [titles, setTitles] = useState([]);
   const [page, setPage] = useState(0);
+  const location = useLocation()
 
   useEffect(() => {
     fetchTitlesByGenre(`http://localhost:5001/api/titles/genre/${genre}`);
-  }, []);
+  }, [location]);
 
   useEffect(() => {
     if (page > 0) fetchTitlesByGenre(`http://localhost:5001/api/titles/genre/${genre}?page=${page - 1}&pageSize=10`)
