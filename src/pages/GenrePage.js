@@ -7,8 +7,6 @@ const GenrePage = () => {
   const [titles, setTitles] = useState([]);
   const [page, setPage] = useState(0);
 
-  console.log(genre)
-
   useEffect(() => {
     fetchTitlesByGenre(`http://localhost:5001/api/titles/genre/${genre}`);
   }, []);

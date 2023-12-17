@@ -3,6 +3,7 @@ import logo from '../IMDBClone.png';
 // import ProfileIcon from '../ProfileIcon.png';
 import '../App.css';
 import { useNavigate } from 'react-router-dom';
+import { Genres } from './Genres';
 
 export const NavBar = () => {
     const navigate = useNavigate()
@@ -36,37 +37,6 @@ export const NavBar = () => {
             console.log(err)
         }
     }, [searchVal])
-
-    const genres = [
-        'Action',
-        'Adventure',
-        'Adult',
-        'Animation',
-        'Biography',
-        'Comedy',
-        'Crime',
-        'Documentary',
-        'Drama',
-        'Family',
-        'Fantasy',
-        'Game-Show',
-        'History',
-        'Horror',
-        'Music',
-        'Musical',
-        'Mystery',
-        'News',
-        'Reality-TV',
-        'Romance',
-        'Sci-Fi',
-        'Short',
-        'Sport',
-        'Talk-Show',
-        'Thriller',
-        'War',
-        'Western',
-        'Other'
-    ]
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -111,17 +81,7 @@ export const NavBar = () => {
                     <li className="nav-item">
                         <a className="nav-link" href="/series"> Series</a>
                     </li>
-                    <li className="nav-item dropdown dropdown-genres">
-                        <a className="nav-link dropdown-toggle" href="/#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Genres
-                        </a>
-                        <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                            {genres.map(genre => {
-                                return <a key={genre} className="dropdown-item" href={'/titles/' + genre}>{genre}</a>;
-                            })}
-                        </div>
-                    </li>
-
+                    <Genres />
                     <li className="nav-item">
                         <a className="nav-link Game" href="/#"> Game</a>
                     </li>
