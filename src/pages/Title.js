@@ -45,7 +45,7 @@ export const Title = () => {
 
     const ratingChanged = async (newRating) => {
         try {
-            await fetch('http://localhost:5001/api/ratings', {
+            const res = await fetch('http://localhost:5001/api/ratings', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -56,7 +56,8 @@ export const Title = () => {
                     rating: newRating
                 })
             })
-            // const json = await res.json()
+             const json = await res.json()
+             console.log(json);
         }
         catch (err) {
             console.log(err)
