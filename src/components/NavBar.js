@@ -73,7 +73,7 @@ export const NavBar = () => {
 
             <div>
                 <form className="form-inline my-2 my-lg-0">
-                    <input onFocus={() => setSearchShown(true)} onChange={(e) => setSearchVal(e.target.value)}className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"></input>
+                    <input value={searchVal} onFocus={() => setSearchShown(true)} onChange={(e) => setSearchVal(e.target.value)} className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"></input>
                     <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </form>
                 {searchVal && searchShown ? 
@@ -85,6 +85,7 @@ export const NavBar = () => {
                                     if (item.id.slice(0, 2) === 'tt') navigate(`title/${item.id}`)
                                     else navigate(`person/${item.id}`)
                                     setSearchShown(false)
+                                    setSearchVal('')
                                 }}
                                 className='search-result'
                                 key={index}

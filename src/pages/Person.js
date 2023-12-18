@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useParams, useLocation } from "react-router-dom"
 
 export const Person = () => {
     const { id } = useParams()
     const [ person, setPerson ] = useState(null)
+    const location = useLocation()
 
     useEffect(() => {
         (async () => {
@@ -11,7 +12,7 @@ export const Person = () => {
             const json = await res.json()
             setPerson(json)
         })()
-    }, [])
+    }, [location])
 
     return (
         <div>
