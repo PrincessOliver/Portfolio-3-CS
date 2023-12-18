@@ -68,11 +68,11 @@ export const Title = () => {
                 body: JSON.stringify({
                     userId: localStorage.getItem('userId'),
                     titleId: movie.id,
-                    rating: newRating
+                    rating: newRating,
+                    timeStamp: new Date()
                 })
             })
             const json = await res.json()
-            console.log(json)
             toast.success(`Title rated with ${newRating}`)
         }
         catch (err) {
@@ -116,7 +116,7 @@ export const Title = () => {
                 {movie.primaryTitle && (<p>primaryTitle: {movie.primaryTitle}</p>)}
                 {movie.type && movie.type !== 'N/A' && movie.type.length !== 0 && <p>type: {movie.type} </p>}
                 {movie.startYear && movie.startYear !== 'N/A' && movie.startYear.length !== 0 && <p>startYear: {movie.startYear} </p>}
-                {movie.endYear && movie.endYear !== 'N/A' && movie.endYear.length !== 0 && <p>endYear: {movie.endYear} </p>}
+                {movie.endYear && movie.endYear !== 'N/A' && movie.endYear.trim().length !== 0 &&  <p>endYear: {movie.endYear} </p>}
                 {movie.omdbReleaseDate && movie.omdbReleaseDate !== 'N/A' && movie.omdbReleaseDate.length !== 0 && <p>omdbReleaseDate: {movie.omdbReleaseDate} </p>}
                 {movie.awards && movie.awards !== 'N/A' && movie.awards.length !== 0 && <p>awards: {movie.awards} </p>}
                 {movie.rated && movie.rated !== 'N/A' && movie.rated.length !== 0 && <p>rated: {movie.rated} </p>}
