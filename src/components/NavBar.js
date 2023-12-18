@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import logo from '../IMDBClone.png';
 // import ProfileIcon from '../ProfileIcon.png';
 import '../App.css';
@@ -13,6 +13,21 @@ export const NavBar = () => {
     const [ searchShown, setSearchShown ] = useState(false)
     const location = useLocation()
     const [ firstRender, setFirstRender ] = useState(true)
+    const searchResultsRef = useRef(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (searchResultsRef.current && !searchResultsRef.current.contains(event.target)) {
+                setSearchShown(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [searchResultsRef]);
 
     useEffect(() => {
         if (firstRender) {
@@ -62,7 +77,7 @@ export const NavBar = () => {
                     <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </form>
                 {searchVal && searchShown ? 
-                    <div className='search-results'>
+                    <div ref={searchResultsRef} className='search-results'>
                         {!searchRes && <span className='loader center'></span>}
                         {searchRes && searchRes.length > 0 && searchRes.map((item, index) => {
                             return <div
