@@ -20,7 +20,7 @@ export const Person = () => {
                 <div>
                     <h1>{person.fullName}</h1>
                     <h1>Born {person.birthYear}</h1>
-                    <h1>{person.deathYear.trim().length !== 0 && person.deathYear}</h1>
+                    <h1>{person.deathYear.trim().length !== 0 && 'Died ' + person.deathYear}</h1>
                     <h1>{person.profession}</h1>
                     <h1>Known for {person.knownForTitles}</h1>
                 </div>
